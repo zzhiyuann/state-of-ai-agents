@@ -1560,8 +1560,8 @@
     <div class="section-label">Interactive Tool</div>
     <h2 class="section-title">Which Framework Should You Use?</h2>
     <p class="section-desc">
-      Answer 5 quick questions and we'll recommend the best frameworks for your specific situation.
-      Based on our deep evaluation of all 10 frameworks above.
+      Answer 5 quick questions about your use case, team, and priorities — we'll recommend the best
+      frameworks for your specific situation based on our deep evaluation of all 10 frameworks.
     </p>
   </div>
 
@@ -2383,51 +2383,54 @@ function initCharts() {
 // ─── Framework Finder Quiz ───
 const finderQuestions = [
   {
-    text: "What's your primary use case?",
+    text: "What are you building?",
     sub: "What will your agents mainly do?",
     options: [
-      { icon: '🔧', label: 'General Purpose', desc: 'Versatile agents for varied tasks', scores: {1:2, 2:2, 3:2, 4:2} },
-      { icon: '💻', label: 'Coding & SWE', desc: 'Write code, fix bugs, ship PRs', scores: {6:3, 8:3, 7:2, 5:1} },
-      { icon: '🏢', label: 'Enterprise Automation', desc: 'Business workflows at scale', scores: {2:3, 4:3, 1:2, 9:2} },
-      { icon: '🔬', label: 'Research & Experimentation', desc: 'Explore ideas, run experiments', scores: {5:3, 3:2, 8:2, 7:1} }
+      { icon: '🤖', label: 'Multi-Agent System', desc: 'Agents coordinating and collaborating', scores: {0:2, 1:3, 2:3, 4:2, 9:2} },
+      { icon: '💻', label: 'Coding / SWE Agent', desc: 'Write code, fix bugs, ship PRs', scores: {6:3, 8:3, 7:3, 2:1} },
+      { icon: '💬', label: 'Chatbot / Assistant', desc: 'Customer-facing conversation agent', scores: {3:3, 1:2, 4:2, 7:2, 2:1} },
+      { icon: '🏢', label: 'Enterprise Workflows', desc: 'Business automation at scale', scores: {2:3, 4:3, 9:3, 1:2} },
+      { icon: '🔬', label: 'Research & Data', desc: 'Explore ideas, analyze data, experiment', scores: {5:3, 1:2, 2:2, 0:1, 8:1} },
+      { icon: '⚡', label: 'Quick Prototype', desc: 'Learn fast, prove a concept', scores: {3:3, 1:3, 5:2, 7:1} }
     ]
   },
   {
     text: 'How big is your team?',
     sub: 'This affects complexity tolerance and support needs',
     options: [
-      { icon: '🧑', label: 'Solo Developer', desc: 'Just me, move fast', scores: {1:3, 3:3, 5:2, 7:2} },
-      { icon: '👥', label: 'Small Team (2–10)', desc: 'Collaborative, some structure', scores: {2:2, 1:2, 7:2, 8:2} },
-      { icon: '🏗️', label: 'Enterprise (10+)', desc: 'Governance, compliance, scale', scores: {2:3, 4:3, 0:2, 9:3} }
+      { icon: '🧑', label: 'Solo Developer', desc: 'Just me, ship fast', scores: {3:3, 1:3, 5:2, 7:2} },
+      { icon: '👥', label: 'Small Team (2–10)', desc: 'Collaborative, flexible stack', scores: {2:2, 1:2, 8:2, 4:2, 0:1} },
+      { icon: '🏗️', label: 'Enterprise (10+)', desc: 'Governance, compliance, multi-team', scores: {2:3, 4:3, 9:3, 0:2} }
     ]
   },
   {
     text: 'What language does your team prefer?',
     sub: 'Framework support varies widely by language',
     options: [
-      { icon: '🐍', label: 'Python', desc: 'Most framework support', scores: {1:1, 5:2, 7:1} },
-      { icon: '📘', label: 'TypeScript', desc: 'Growing framework support', scores: {2:2, 3:2, 8:2, 6:2} },
-      { icon: '🌐', label: 'Multi-Language', desc: 'Python + TS + Java/Go/.NET', scores: {4:3, 0:2, 2:1} },
-      { icon: '⚙️', label: '.NET / Java / Go', desc: 'Enterprise language stack', scores: {4:3, 0:2, 9:2} }
+      { icon: '🐍', label: 'Python', desc: 'Most framework support', scores: {1:2, 3:2, 5:2, 7:2, 2:1, 8:1} },
+      { icon: '📘', label: 'TypeScript / JS', desc: 'Growing framework support', scores: {2:3, 3:2, 8:2, 6:2} },
+      { icon: '🌐', label: 'Multi-Language', desc: 'Python + TS + Java/Go/.NET', scores: {4:3, 0:2, 9:2, 2:1} },
+      { icon: '⚙️', label: '.NET / Java / Go', desc: 'Enterprise language stack', scores: {4:3, 9:3, 0:2} }
     ]
   },
   {
     text: 'How important is protocol support (MCP/A2A)?',
     sub: 'Interoperability with the emerging agent ecosystem',
     options: [
-      { icon: '🔗', label: 'Critical', desc: 'Must have native MCP + A2A', scores: {4:3, 1:3, 2:2, 0:1} },
-      { icon: '👍', label: 'Nice to Have', desc: 'Prefer it, not a dealbreaker', scores: {3:2, 7:2, 2:1} },
-      { icon: '🤷', label: 'Not a Priority', desc: 'Features matter more than protocols', scores: {5:2, 6:2, 8:2} }
+      { icon: '🔗', label: 'Critical — Must Have', desc: 'Native MCP + A2A is essential', scores: {4:3, 1:3, 2:3} },
+      { icon: '👍', label: 'Nice to Have', desc: 'Prefer it, not a dealbreaker', scores: {3:2, 7:2, 2:2, 1:1} },
+      { icon: '🤷', label: 'Not Important', desc: 'Features matter more than protocols', scores: {5:2, 6:2, 8:2, 3:1} }
     ]
   },
   {
     text: "What's your top priority?",
     sub: 'If you had to optimize for one thing',
     options: [
-      { icon: '✨', label: 'Simplicity', desc: 'Get started fast, minimal boilerplate', scores: {3:3, 1:3, 5:2} },
-      { icon: '🎛️', label: 'Flexibility & Control', desc: 'Full power, custom workflows', scores: {2:3, 4:2, 8:2} },
-      { icon: '🚀', label: 'Production Readiness', desc: 'Battle-tested, enterprise-proven', scores: {2:3, 1:2, 4:2, 9:2} },
-      { icon: '⚡', label: 'Cutting Edge', desc: 'Latest innovations, fast iteration', scores: {8:3, 7:3, 4:2} }
+      { icon: '✨', label: 'Simplicity', desc: 'Get started fast, minimal boilerplate', scores: {3:3, 1:3, 5:2, 7:1} },
+      { icon: '🎛️', label: 'Flexibility & Power', desc: 'Full control over workflows and state', scores: {2:3, 4:2, 0:2, 8:2} },
+      { icon: '🚀', label: 'Production Readiness', desc: 'Battle-tested, enterprise-proven', scores: {2:3, 9:3, 1:2, 4:2} },
+      { icon: '🧠', label: 'Memory & Context', desc: 'Cross-session persistence, learning agents', scores: {1:3, 4:3, 2:2, 0:1} },
+      { icon: '🌍', label: 'Community & Ecosystem', desc: 'Large community, lots of examples', scores: {0:3, 1:2, 2:2, 5:2, 3:1} }
     ]
   }
 ];
@@ -2499,6 +2502,50 @@ function selectFinderOption(optIndex) {
   }
 }
 
+// Tailored "why" reasoning for each framework
+const frameworkWhyMap = {
+  'AutoGen / AG2': {
+    tagline: 'Largest community with battle-tested multi-agent patterns',
+    highlights: ['54K+ stars, 530+ contributors — biggest ecosystem', 'AutoGen Studio: visual no-code workflow builder', '.NET + Python support for enterprise polyglot teams', 'Microsoft Agent Framework merger imminent (AutoGen + Semantic Kernel)']
+  },
+  'CrewAI': {
+    tagline: 'The most approachable framework with sophisticated memory',
+    highlights: ['YAML-first config — build crews in minutes', 'Most advanced memory system (LLM-powered, unified)', 'First-class MCP + A2A native support', '12M+ daily agent executions in production']
+  },
+  'LangGraph': {
+    tagline: 'Most production-proven with maximum orchestration flexibility',
+    highlights: ['Powers Klarna (85M users), Replit, Elastic in production', 'Cyclic graph support with time-travel debugging', '30-40% lower latency than CrewAI/AutoGen on complex flows', 'LangGraph Studio: visual agent IDE']
+  },
+  'OpenAI Agents SDK': {
+    tagline: 'Radically simple — 5 primitives, ship in an afternoon',
+    highlights: ['Only 5 concepts to learn: Agents, Handoffs, Guardrails, Sessions, Tracing', 'Model-agnostic: works with 100+ LLMs (not just OpenAI)', 'Best-in-class handoff pattern (inherited from Swarm)', 'Native voice agents with RealtimeAgent — unique in category']
+  },
+  'Google ADK': {
+    tagline: 'Only framework supporting all 4 protocols — maximum interop',
+    highlights: ['MCP + A2A + AG-UI + A2UI: most protocol-complete framework', '4 languages: Python, TypeScript, Java, Go', 'ADK 2.0: graph-based workflows with routing & fan-out', '70+ pre-built integrations (Stripe, GitHub, MongoDB)']
+  },
+  'Smolagents': {
+    tagline: 'Code-first agents — write Python, not JSON schemas',
+    highlights: ['Agents generate executable Python (more expressive than tool calls)', 'Deep Hugging Face Hub integration (models, datasets)', 'Lightweight with minimal dependencies', 'Ideal for open-weight model experimentation']
+  },
+  'Open-SWE': {
+    tagline: 'Assign a task via Slack/GitHub, get a PR back — async coding agent',
+    highlights: ['Built on Deep Agents + LangGraph (composition over forking)', 'Enterprise integrations: Slack, Linear, GitHub webhooks', 'Mid-execution feedback via double texting', 'Pluggable sandboxes: 4 providers, no vendor lock-in']
+  },
+  'Claude Agent SDK': {
+    tagline: 'Deep MCP integration with 1M token context window',
+    highlights: ['Created by Anthropic (who created MCP)', 'Claude Opus 4.6 with 1M token context — longest in class', 'Rapidly maturing: session management, skills, memory', 'Computer use capabilities built-in']
+  },
+  'Deep Agents': {
+    tagline: 'Fastest-growing framework — composable agent harness layer',
+    highlights: ['16.5K stars in 9 days (fastest growth in agent history)', 'Composable middleware: hooks, context injection', 'Powers Open-SWE async coding agents', 'Context compression pipeline for long-running tasks']
+  },
+  'Dapr Agents': {
+    tagline: 'Kubernetes-native enterprise reliability, CNCF-backed',
+    highlights: ['v1.0 GA — production-ready from day one', 'CNCF-backed with Dapr ecosystem (sidecar pattern)', 'NVIDIA collaboration for GPU-accelerated inference', '4 languages: Python, .NET, Go, Java — enterprise polyglot']
+  }
+};
+
 function showFinderResults() {
   document.getElementById('finderQuestions').innerHTML = '';
   document.querySelectorAll('#finderProgress .step').forEach(el => el.className = 'step done');
@@ -2509,7 +2556,7 @@ function showFinderResults() {
     .filter(r => r.fw)
     .sort((a, b) => b.score - a.score);
 
-  const maxScore = ranked[0].score;
+  const maxScore = ranked[0].score || 1;
   const top3 = ranked.slice(0, 3);
   const rankLabels = ['gold', 'silver', 'bronze'];
   const rankNames = ['Best Match', '2nd Pick', '3rd Pick'];
@@ -2518,28 +2565,29 @@ function showFinderResults() {
   const resultsDiv = document.getElementById('finderResults');
   resultsDiv.innerHTML = `
     <div class="finder-results-title">Your Top Frameworks</div>
-    <div class="finder-results-sub">Based on your priorities, here are your best matches</div>
+    <div class="finder-results-sub">Based on your answers, here are the best matches for your situation</div>
     ${top3.map((r, i) => {
       const pct = Math.round((r.score / maxScore) * 100);
-      const reasons = r.fw.strengths.slice(0, 3);
+      const whyData = frameworkWhyMap[r.fw.name] || { tagline: r.fw.desc.slice(0, 80), highlights: r.fw.strengths.slice(0, 3) };
       return `
         <div class="finder-result-card ${i === 0 ? 'top-pick' : ''}">
           <div class="finder-result-rank ${rankLabels[i]}">${rankNames[i]}</div>
           <div class="finder-result-name">${r.fw.name}</div>
-          <div class="finder-result-org">${r.fw.org}</div>
+          <div class="finder-result-org">${whyData.tagline}</div>
           <div class="finder-match-bar">
             <div class="finder-match-fill" style="width: 0%; background: ${colors[i]};" data-width="${pct}%"></div>
           </div>
-          <div class="finder-match-label"><strong>${pct}%</strong> match score</div>
+          <div class="finder-match-label"><strong>${pct}%</strong> match · ${(r.fw.stars / 1000).toFixed(1)}K stars · ${r.fw.langs.join(', ')}</div>
           <ul class="finder-reasons">
-            ${reasons.map(s => `<li>${s}</li>`).join('')}
+            ${whyData.highlights.slice(0, 3).map(s => `<li>${s}</li>`).join('')}
           </ul>
         </div>
       `;
     }).join('')}
     <div class="finder-actions">
       <button class="finder-btn finder-btn-ghost" onclick="initFinder()">Start Over</button>
-      <button class="finder-btn finder-btn-primary" onclick="document.getElementById('frameworks').scrollIntoView({behavior:'smooth'})">See Full Analysis</button>
+      <button class="finder-btn finder-btn-primary" onclick="loadCompareFromFinder([${top3.map(r => r.idx).join(',')}])">Compare These Three</button>
+      <button class="finder-btn finder-btn-ghost" onclick="document.getElementById('frameworks').scrollIntoView({behavior:'smooth'})">See Full Analysis</button>
     </div>
   `;
   resultsDiv.classList.add('active');
@@ -2552,12 +2600,205 @@ function showFinderResults() {
   }, 100);
 }
 
+// Bridge from Finder results to Comparison tool
+function loadCompareFromFinder(indices) {
+  // Reset comparison
+  selectedCompare = [];
+  document.querySelectorAll('.compare-chip').forEach(c => c.classList.remove('selected'));
+
+  // Select the given frameworks
+  indices.forEach(idx => {
+    selectedCompare.push(idx);
+    const chip = document.querySelector(`.compare-chip[data-idx="${idx}"]`);
+    if (chip) chip.classList.add('selected');
+  });
+
+  // Scroll to comparison section and render
+  document.getElementById('compare').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => renderComparison(), 400);
+}
+
+// ─── Head-to-Head Comparison Tool ───
+
+// Multi-dimensional framework attributes (1-10 scale)
+const frameworkAttrs = {
+  'AutoGen / AG2':      { production: 5, simplicity: 4, protocols: 5, community: 10, memory: 4, enterprise: 4, multiLang: 6 },
+  'CrewAI':             { production: 7, simplicity: 9, protocols: 7, community: 9,  memory: 9, enterprise: 7, multiLang: 3 },
+  'LangGraph':          { production: 10, simplicity: 4, protocols: 9, community: 8,  memory: 6, enterprise: 7, multiLang: 6 },
+  'OpenAI Agents SDK':  { production: 5, simplicity: 10, protocols: 4, community: 7,  memory: 3, enterprise: 2, multiLang: 5 },
+  'Google ADK':         { production: 8, simplicity: 5, protocols: 10, community: 6,  memory: 8, enterprise: 9, multiLang: 10 },
+  'Smolagents':         { production: 4, simplicity: 8, protocols: 3, community: 7,  memory: 2, enterprise: 1, multiLang: 2 },
+  'Open-SWE':           { production: 5, simplicity: 4, protocols: 2, community: 3,  memory: 4, enterprise: 3, multiLang: 5 },
+  'Claude Agent SDK':   { production: 5, simplicity: 7, protocols: 5, community: 3,  memory: 4, enterprise: 3, multiLang: 2 },
+  'Deep Agents':        { production: 4, simplicity: 5, protocols: 3, community: 6,  memory: 4, enterprise: 2, multiLang: 5 },
+  'Dapr Agents':        { production: 8, simplicity: 3, protocols: 3, community: 2,  memory: 5, enterprise: 10, multiLang: 9 }
+};
+
+const attrLabels = {
+  production: 'Production Readiness',
+  simplicity: 'Simplicity',
+  protocols: 'Protocol Support',
+  community: 'Community & Ecosystem',
+  memory: 'Memory Capabilities',
+  enterprise: 'Enterprise Features',
+  multiLang: 'Multi-Language'
+};
+
+const compareColors = [
+  { border: 'rgba(59, 130, 246, 0.9)', bg: 'rgba(59, 130, 246, 0.12)' },
+  { border: 'rgba(139, 92, 246, 0.9)', bg: 'rgba(139, 92, 246, 0.12)' },
+  { border: 'rgba(16, 185, 129, 0.9)', bg: 'rgba(16, 185, 129, 0.12)' },
+  { border: 'rgba(245, 158, 11, 0.9)', bg: 'rgba(245, 158, 11, 0.12)' }
+];
+
+let selectedCompare = [];
+let compareChart = null;
+
+function initCompare() {
+  const selector = document.getElementById('compareSelector');
+  selector.innerHTML = frameworks.map((fw, i) =>
+    `<button class="compare-chip" data-idx="${i}" onclick="toggleCompare(${i})">${fw.name}</button>`
+  ).join('');
+}
+
+function toggleCompare(idx) {
+  const chip = document.querySelector(`.compare-chip[data-idx="${idx}"]`);
+  const pos = selectedCompare.indexOf(idx);
+
+  if (pos > -1) {
+    selectedCompare.splice(pos, 1);
+    chip.classList.remove('selected');
+  } else {
+    if (selectedCompare.length >= 4) return; // max 4
+    selectedCompare.push(idx);
+    chip.classList.add('selected');
+  }
+
+  renderComparison();
+}
+
+function renderComparison() {
+  const body = document.getElementById('compareBody');
+
+  if (selectedCompare.length < 2) {
+    body.innerHTML = `
+      <div class="compare-empty">
+        <div style="font-size: 2.5rem; opacity: 0.3; margin-bottom: 0.5rem;">&#x2194;</div>
+        ${selectedCompare.length === 0 ? 'Pick frameworks above to see them compared' : 'Select one more framework to compare'}
+        <div class="compare-empty-sub">Radar chart + feature-by-feature breakdown</div>
+      </div>
+    `;
+    if (compareChart) { compareChart.destroy(); compareChart = null; }
+    return;
+  }
+
+  const selected = selectedCompare.map(i => frameworks[i]);
+  const dims = Object.keys(attrLabels);
+
+  // Build the two-panel layout
+  body.innerHTML = `
+    <div class="compare-panel compare-radar-wrap">
+      <div class="compare-panel-title">Radar Overview</div>
+      <div class="chart-wrapper"><canvas id="compareRadarChart"></canvas></div>
+    </div>
+    <div class="compare-panel">
+      <div class="compare-panel-title">Feature Breakdown</div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            ${selected.map(fw => `<th style="text-align: center;">${fw.name.split(' /')[0].split(' (')[0]}</th>`).join('')}
+          </tr>
+        </thead>
+        <tbody>
+          ${dims.map(dim => {
+            const vals = selected.map(fw => frameworkAttrs[fw.name]?.[dim] || 0);
+            const maxVal = Math.max(...vals);
+            return `<tr>
+              <td>${attrLabels[dim]}</td>
+              ${vals.map(v => `<td style="text-align: center;" class="${v === maxVal && maxVal > 0 ? 'cell-highlight' : ''}">${v}/10</td>`).join('')}
+            </tr>`;
+          }).join('')}
+          <tr>
+            <td>Stars</td>
+            ${selected.map(fw => {
+              const stars = selected.map(f => f.stars);
+              const maxS = Math.max(...stars);
+              return `<td style="text-align: center;" class="${fw.stars === maxS ? 'cell-highlight' : ''}">${(fw.stars/1000).toFixed(1)}K</td>`;
+            }).join('')}
+          </tr>
+          <tr>
+            <td>Architecture</td>
+            ${selected.map(fw => `<td style="text-align: center; font-size: 0.75rem;">${fw.arch}</td>`).join('')}
+          </tr>
+          <tr>
+            <td>MCP</td>
+            ${selected.map(fw => `<td style="text-align: center;"><span class="badge badge-${fw.mcp === 'yes' ? 'yes' : fw.mcp === 'partial' ? 'partial' : 'no'}">${fw.mcp === 'yes' ? 'Native' : fw.mcp === 'partial' ? 'Adapter' : 'No'}</span></td>`).join('')}
+          </tr>
+          <tr>
+            <td>A2A</td>
+            ${selected.map(fw => `<td style="text-align: center;"><span class="badge badge-${fw.a2a === 'yes' ? 'yes' : fw.a2a === 'partial' ? 'partial' : 'no'}">${fw.a2a === 'yes' ? 'Native' : fw.a2a === 'partial' ? 'Adapter' : 'No'}</span></td>`).join('')}
+          </tr>
+          <tr>
+            <td>Languages</td>
+            ${selected.map(fw => `<td style="text-align: center; font-size: 0.75rem;">${fw.langs.join(', ')}</td>`).join('')}
+          </tr>
+          <tr>
+            <td>License</td>
+            ${selected.map(fw => `<td style="text-align: center; font-size: 0.75rem; font-family: var(--font-mono);">${fw.license}</td>`).join('')}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  // Render radar chart
+  const ctx = document.getElementById('compareRadarChart').getContext('2d');
+  if (compareChart) compareChart.destroy();
+
+  compareChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: dims.map(d => attrLabels[d]),
+      datasets: selected.map((fw, i) => ({
+        label: fw.name.split(' /')[0],
+        data: dims.map(d => frameworkAttrs[fw.name]?.[d] || 0),
+        borderColor: compareColors[i].border,
+        backgroundColor: compareColors[i].bg,
+        pointBackgroundColor: compareColors[i].border,
+        borderWidth: 2,
+        pointRadius: 3
+      }))
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 10,
+          grid: { color: 'rgba(42, 53, 72, 0.5)' },
+          angleLines: { color: 'rgba(42, 53, 72, 0.5)' },
+          pointLabels: { color: '#94a3b8', font: { size: 10 } },
+          ticks: { display: false }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#94a3b8', usePointStyle: true, pointStyle: 'circle', padding: 12, font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
+
 // ─── Initialize ───
 document.addEventListener('DOMContentLoaded', () => {
   renderTable(frameworks);
   renderCards(frameworks);
   renderMemoryGrid();
   initFinder();
+  initCompare();
   try { initCharts(); } catch(e) { console.warn('Charts failed to load:', e); }
 
   // Intersection observer for scroll animations
