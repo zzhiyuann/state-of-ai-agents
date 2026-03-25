@@ -823,16 +823,16 @@
   <div class="hero-badge">Research Report &middot; March 2026</div>
   <h1>State of <em>AI Agents</em></h1>
   <p class="subtitle">
-    A comprehensive analysis of 8 major agent frameworks, 4 interoperability protocols,
+    A comprehensive analysis of 10 major agent frameworks, 4 interoperability protocols,
     memory architectures, and market dynamics — based on deep technical evaluation.
   </p>
   <div class="stats-row">
     <div class="stat-card animate-in delay-1">
-      <div class="stat-number" style="color: var(--accent-blue);">8</div>
+      <div class="stat-number" style="color: var(--accent-blue);">10</div>
       <div class="stat-label">Frameworks Analyzed</div>
     </div>
     <div class="stat-card animate-in delay-2">
-      <div class="stat-number" style="color: var(--accent-green);">$8.5B</div>
+      <div class="stat-number" style="color: var(--accent-green);">$10.9B</div>
       <div class="stat-label">Market Size 2026</div>
     </div>
     <div class="stat-card animate-in delay-3">
@@ -840,7 +840,7 @@
       <div class="stat-label">MCP Monthly Downloads</div>
     </div>
     <div class="stat-card animate-in delay-4">
-      <div class="stat-number" style="color: var(--accent-amber);">243K+</div>
+      <div class="stat-number" style="color: var(--accent-amber);">222K+</div>
       <div class="stat-label">Combined GitHub Stars</div>
     </div>
   </div>
@@ -894,6 +894,16 @@
         <div class="timeline-desc">OpenShell announced with 17 enterprise partners. Enterprise agent deployments accelerate.</div>
       </div>
       <div class="timeline-item">
+        <div class="timeline-date">March 23, 2026</div>
+        <div class="timeline-title">Dapr Agents v1.0 GA + Cisco DefenseClaw</div>
+        <div class="timeline-desc">CNCF-backed Dapr Agents hits 1.0 GA at KubeCon Europe (NVIDIA collab, ZEISS production). Cisco open-sources DefenseClaw — first agent security toolkit (MCP Scanner, A2A Scanner, AI BoM).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">March 15, 2026</div>
+        <div class="timeline-title">Deep Agents: 16.5K stars in 9 days</div>
+        <div class="timeline-desc">LangChain launches Deep Agents composable harness — fastest-growing new framework in history. AG2 ships ground-up Beta with streaming and AG-UI native support.</div>
+      </div>
+      <div class="timeline-item">
         <div class="timeline-date">April 2026</div>
         <div class="timeline-title">ICLR 2026 MemAgent Workshop</div>
         <div class="timeline-desc">First dedicated academic workshop on agent memory systems (April 27). Signals academic recognition of memory as critical infrastructure.</div>
@@ -908,7 +918,7 @@
 <section id="frameworks">
   <div class="section-header">
     <div class="section-label">Framework Analysis</div>
-    <h2 class="section-title">8 Frameworks, Deep Technical Evaluation</h2>
+    <h2 class="section-title">10 Frameworks, Deep Technical Evaluation</h2>
     <p class="section-desc">
       Each framework was evaluated across architecture, memory, orchestration, protocol support,
       deployment options, and production readiness. Click column headers to sort. Click cards below for detailed analysis.
@@ -963,8 +973,8 @@
     <div class="protocol-card mcp">
       <div class="protocol-name">MCP</div>
       <div class="protocol-full">Model Context Protocol (Anthropic, 2024)</div>
-      <div class="maturity-bar"><div class="maturity-fill" style="width: 70%; background: var(--accent-green);"></div></div>
-      <div class="maturity-label"><span>Maturity</span><span>7 / 10</span></div>
+      <div class="maturity-bar"><div class="maturity-fill" style="width: 80%; background: var(--accent-green);"></div></div>
+      <div class="maturity-label"><span>Maturity</span><span>8 / 10</span></div>
       <div class="protocol-stats">
         <div class="protocol-stat">
           <div class="protocol-stat-label">Monthly Downloads</div>
@@ -991,8 +1001,8 @@
     <div class="protocol-card a2a">
       <div class="protocol-name">A2A</div>
       <div class="protocol-full">Agent-to-Agent Protocol (Google, 2025)</div>
-      <div class="maturity-bar"><div class="maturity-fill" style="width: 50%; background: var(--accent-purple);"></div></div>
-      <div class="maturity-label"><span>Maturity</span><span>5 / 10</span></div>
+      <div class="maturity-bar"><div class="maturity-fill" style="width: 60%; background: var(--accent-purple);"></div></div>
+      <div class="maturity-label"><span>Maturity</span><span>6 / 10</span></div>
       <div class="protocol-stats">
         <div class="protocol-stat">
           <div class="protocol-stat-label">Organizations</div>
@@ -1277,7 +1287,7 @@ const frameworks = [
   {
     name: 'AutoGen / AG2',
     org: 'Microsoft / AG2.ai',
-    stars: 56091,
+    stars: 54500,
     arch: 'Actor Model / GroupChat',
     mcp: 'partial', // via adapters
     a2a: 'partial', // via MS Agent Framework
@@ -1287,19 +1297,19 @@ const frameworks = [
     license: 'CC-BY-4.0 / Apache 2.0',
     enterprise: false,
     oss: true,
-    desc: 'The most starred agent framework. Microsoft\'s AutoGen 0.4 introduced an actor-model rewrite, now merging into Microsoft Agent Framework. AG2 is the community fork continuing the original architecture.',
+    desc: 'The most starred agent framework, now in maintenance mode (bug fixes only). All new development goes to Microsoft Agent Framework (AutoGen + Semantic Kernel merge), with GA imminent end of Q1 2026. AG2 (4.2K stars) is the community fork with active development — AG2 Beta launched March 16 with streaming architecture, AG-UI + A2A native support, and OpenTelemetry tracing.',
     strengths: [
-      'Largest community (56K stars, 530+ contributors)',
+      'Largest community (54.5K stars, 530+ contributors)',
       'AutoGen Studio: visual no-code workflow builder',
       '.NET + Python support (most frameworks are Python-only)',
       'Actor-model distributed runtime for scaling',
-      'Academic pedigree (Microsoft Research origin)'
+      'Microsoft Agent Framework GA imminent (merges AutoGen + Semantic Kernel)'
     ],
     weaknesses: [
+      'AutoGen now in maintenance mode — no new features',
+      'Ecosystem fragmented: AG2 vs AutoGen vs MS Agent Framework',
       'GroupChat is expensive (N agents * M rounds * growing context)',
       'No first-party observability or enterprise security',
-      'Ecosystem fragmented: AG2 vs AutoGen vs MS Agent Framework',
-      'Auto speaker selection unreliable for complex workflows',
       'Corba vulnerability: 79-100% agents blocked in 1.6-1.9 turns'
     ],
     memory: 'Teachability: vector DB-backed persistent memos. Not sophisticated — no episodic/semantic separation. 90% retention, <200ms latency.',
@@ -1308,7 +1318,7 @@ const frameworks = [
   {
     name: 'CrewAI',
     org: 'CrewAI Inc.',
-    stars: 47000,
+    stars: 45900,
     arch: 'Role-Based Crews',
     mcp: 'yes',
     a2a: 'yes',
@@ -1318,7 +1328,7 @@ const frameworks = [
     license: 'MIT',
     enterprise: true,
     oss: true,
-    desc: 'Role-based agent framework with the most approachable API. YAML-first configuration for rapid iteration. First framework to ship native MCP + A2A support. Enterprise tier includes HIPAA + SOC 2.',
+    desc: 'Role-based agent framework with the most approachable API. Powers 12M+ daily agent executions in production. YAML-first configuration for rapid iteration. First framework to ship native MCP + A2A support. v1.11.0rc1 adds token-saving tool search for Anthropic models. Enterprise tier includes HIPAA + SOC 2.',
     strengths: [
       'Lowest learning curve of major frameworks',
       'YAML-first config for rapid iteration',
@@ -1340,7 +1350,7 @@ const frameworks = [
   {
     name: 'LangGraph',
     org: 'LangChain Inc.',
-    stars: 27271,
+    stars: 27200,
     arch: 'Graph-Based State Machine',
     mcp: 'yes',
     a2a: 'yes',
@@ -1373,7 +1383,7 @@ const frameworks = [
   {
     name: 'OpenAI Agents SDK',
     org: 'OpenAI',
-    stars: 20200,
+    stars: 20100,
     arch: 'Agent Loop (5 Primitives)',
     mcp: 'yes',
     a2a: false,
@@ -1383,14 +1393,14 @@ const frameworks = [
     license: 'MIT',
     enterprise: false,
     oss: true,
-    desc: 'Radically simple — only 5 primitives (Agents, Handoffs, Guardrails, Sessions, Tracing). Best-in-class handoff pattern evolved from Swarm. Despite OpenAI branding, supports 100+ LLMs via Chat Completions API.',
+    desc: 'Radically simple — only 5 primitives (Agents, Handoffs, Guardrails, Sessions, Tracing). Most active recent development: v0.12.2-0.13.0 shipped in 9 days (March 14-23). v0.13.0 adds MCP resource listing/reading and gpt-realtime-1.5. Despite OpenAI branding, supports 100+ LLMs.',
     strengths: [
       'Radical simplicity: 5 primitives, minimal abstraction',
       'Model-agnostic (100+ LLMs despite OpenAI branding)',
       'Best-in-class agent handoff pattern (from Swarm heritage)',
-      'Built-in guardrails: input/output validation, PII masking, jailbreak detection',
+      'MCP resource capabilities (list + read) beyond just tools (v0.13.0)',
       'Built-in tracing with OpenAI Dashboard integration',
-      'Native voice agents (RealtimeAgent) — unique in category'
+      'Native voice agents (RealtimeAgent with gpt-realtime-1.5) — unique in category'
     ],
     weaknesses: [
       'No native persistent memory (Sessions ephemeral by default)',
@@ -1406,7 +1416,7 @@ const frameworks = [
   {
     name: 'Google ADK',
     org: 'Google',
-    stars: 18500,
+    stars: 15600,
     arch: 'Event-Driven Hierarchical',
     mcp: 'yes',
     a2a: 'yes',
@@ -1416,21 +1426,21 @@ const frameworks = [
     license: 'Apache 2.0',
     enterprise: true,
     oss: true,
-    desc: 'The most protocol-complete framework — supports all 4 protocols (MCP + A2A + AG-UI + A2UI). ADK 2.0 Alpha introduces graph-based workflows. 4 languages, deepest GCP integration.',
+    desc: 'The most protocol-complete framework — supports all 4 protocols (MCP + A2A + AG-UI + A2UI). ADK 2.0 Alpha (March 18) introduces graph-based workflows with routing, fan-out/fan-in, loops, retry, and dynamic nodes. Extraordinary release cadence: 5 releases in 11 days. 4 languages, deepest GCP integration.',
     strengths: [
       'Only framework natively supporting all 4 protocols',
       'Multi-language: Python + TypeScript + Java + Go (broadest)',
-      'ADK 2.0: advanced deterministic graph workflow engine',
+      'ADK 2.0 Alpha: graph-based workflows with routing, fan-out/fan-in, retry',
       'Memory Bank: Gemini-powered semantic extraction',
       '70+ pre-built integrations (Stripe, GitHub, MongoDB, etc.)',
-      'Computer Use: built-in tool for operating UI elements'
+      'Fastest release cadence: 5 releases in 11 days (March 2026)'
     ],
     weaknesses: [
       'Best features require GCP (Memory Bank, Agent Engine)',
       'Agent Engine Python-only for managed deployment',
-      'Tool mutual exclusivity bugs',
+      'ADK 2.0 breaking changes (Alpha, incompatible storage, Python 3.11+)',
+      'Star count fluctuation (~15.6K, down from 18.5K — possible purge)',
       'Strict folder structure with unhelpful error messages',
-      'ADK 2.0 breaking changes (Alpha, incompatible storage)',
       'Complexity: many moving parts, steeper learning curve'
     ],
     memory: 'Three-layer: Session (history) → State (key-value, scoped prefixes) → Memory (cross-session). Memory Bank uses Gemini for async fact extraction. Scoped to user identity.',
@@ -1439,7 +1449,7 @@ const frameworks = [
   {
     name: 'Smolagents',
     org: 'Hugging Face',
-    stars: 26000,
+    stars: 25500,
     arch: 'Code-First',
     mcp: 'partial',
     a2a: false,
@@ -1470,7 +1480,7 @@ const frameworks = [
   {
     name: 'Open-SWE',
     org: 'LangChain',
-    stars: 8178,
+    stars: 7700,
     arch: '3-Layer Composition',
     mcp: false,
     a2a: false,
@@ -1480,7 +1490,7 @@ const frameworks = [
     license: 'MIT',
     enterprise: false,
     oss: true,
-    desc: 'Async coding agent built on Deep Agents + LangGraph. Works like a team member — assign a task via Slack/Linear/GitHub, get a PR back. Inspired by Stripe Minions and Ramp Inspect.',
+    desc: 'Async coding agent rebuilt on Deep Agents + LangGraph (major re-launch March 17, 2026). Works like a team member — assign a task via Slack/Linear/GitHub, get a PR back. LangChain also launched openshell-deepagent (NVIDIA OpenShell sandbox), deep-agents-ui, and deepagentsjs (JS port).',
     strengths: [
       'Async-first: assign task, get PR back (not copilot)',
       'Composition over forking (Deep Agents + LangGraph)',
@@ -1502,7 +1512,7 @@ const frameworks = [
   {
     name: 'Claude Agent SDK',
     org: 'Anthropic',
-    stars: 6000,
+    stars: 5600,
     arch: 'Computer-Access-First',
     mcp: 'yes',
     a2a: false,
@@ -1512,24 +1522,91 @@ const frameworks = [
     license: 'MIT',
     enterprise: false,
     oss: true,
-    desc: 'Anthropic\'s agent SDK focused on computer use and tool integration. Claude-only but deeply integrated with MCP. Optimized for computer-access tasks like browser control and desktop automation.',
+    desc: 'Anthropic\'s agent SDK with rapid maturation — v0.1.46-0.1.50 shipped in 15 days (March 2026) adding session management, MCP server control, and skills/memory in AgentDefinition. Claude Opus 4.6 (1M context) launched. Deeply integrated with MCP (Anthropic created MCP).',
     strengths: [
       'Deep MCP integration (Anthropic created MCP)',
+      'Rapidly maturing: session management, tagging, MCP server control',
       'Computer use capabilities built-in',
+      'Claude Opus 4.6 with 1M token context window',
       'Strong safety/alignment features',
-      'Claude model quality advantage for complex reasoning',
-      'Clean, well-documented API'
+      'Skills, memory, and MCP servers in AgentDefinition'
     ],
     weaknesses: [
       'Claude-only (no other model support)',
-      'Smallest community (6K stars)',
+      'Smallest community (5.6K stars)',
       'No A2A support',
       'Python-only',
       'Narrow focus compared to general-purpose frameworks',
       'Limited orchestration patterns'
     ],
-    memory: 'Basic conversation management. Relies on MCP for tool integration. No built-in long-term memory system.',
+    memory: 'Basic conversation management with new session APIs (list, tag, rename). Relies on MCP for tool integration. Memory field in AgentDefinition is new (March 2026).',
     orchestration: 'Single-agent focused. Multi-agent possible via MCP but not first-class. Less mature orchestration than competitors.'
+  },
+  {
+    name: 'Deep Agents',
+    org: 'LangChain',
+    stars: 16500,
+    arch: 'Composable Agent Harness',
+    mcp: 'partial',
+    a2a: false,
+    agui: false,
+    a2ui: false,
+    langs: ['Python', 'TypeScript'],
+    license: 'MIT',
+    enterprise: false,
+    oss: true,
+    desc: 'The fastest-growing new framework of 2026 — 16.5K stars in 9 days after March 15 launch. A composable agent harness layer that sits between LangGraph (execution engine) and application code. Powers Open-SWE and is designed for building long-running, async coding agents.',
+    strengths: [
+      'Fastest community growth in agent framework history (16.5K stars in 9 days)',
+      'Composable middleware architecture (hooks, context injection)',
+      'Powers Open-SWE (proven async coding agent)',
+      'AGENTS.md specification for repo-level agent context',
+      'Context compression pipeline (offloading, summarization)',
+      'Built on LangGraph — inherits its orchestration capabilities'
+    ],
+    weaknesses: [
+      'Very new (March 2026) — not battle-tested',
+      'No MCP or A2A native support',
+      'Tightly coupled to LangGraph ecosystem',
+      'No standalone deployment story',
+      'Limited documentation (rapid development phase)',
+      'Narrow focus on coding agents currently'
+    ],
+    memory: 'No native long-term memory. AGENTS.md injection for repo context. Context compression: large content offloaded to virtual filesystem. Cross-thread memory via LangGraph Memory Store.',
+    orchestration: 'Middleware hooks (before_agent, wrap_model_call). Subagent spawning via task tool. Designed for sequential pipeline (Planner → Programmer → Reviewer) with human injection.'
+  },
+  {
+    name: 'Dapr Agents',
+    org: 'CNCF / Microsoft',
+    stars: 3200,
+    arch: 'Sidecar + Workflow Engine',
+    mcp: 'partial',
+    a2a: false,
+    agui: false,
+    a2ui: false,
+    langs: ['Python', '.NET', 'Go', 'Java'],
+    license: 'Apache 2.0',
+    enterprise: true,
+    oss: true,
+    desc: 'Hit v1.0 GA at KubeCon Europe (March 23, 2026). CNCF-backed production agent framework built on Dapr\'s sidecar architecture. NVIDIA collaboration for GPU-accelerated inference. ZEISS deployed in production. Focus on enterprise reliability and Kubernetes-native deployment.',
+    strengths: [
+      'CNCF-backed with enterprise pedigree (Dapr ecosystem)',
+      'v1.0 GA — production-ready from day one',
+      'Kubernetes-native deployment with sidecar pattern',
+      'NVIDIA collaboration for GPU inference',
+      'Multi-language: Python, .NET, Go, Java',
+      'Enterprise customer (ZEISS) at launch'
+    ],
+    weaknesses: [
+      'Small community (3.2K stars)',
+      'No A2A support',
+      'Kubernetes dependency adds operational complexity',
+      'New to agent space — less agent-specific features',
+      'Limited agent-specific documentation',
+      'Sidecar pattern unfamiliar to many AI developers'
+    ],
+    memory: 'Leverages Dapr state stores (Redis, PostgreSQL, etc.) for persistence. Workflow engine provides checkpoint-based state management. No agent-specific memory abstractions.',
+    orchestration: 'Dapr Workflow engine (deterministic, fault-tolerant). Pub/sub for agent communication. Built-in retries, compensation. Less flexible than LangGraph for dynamic agent patterns.'
   }
 ];
 
@@ -1544,7 +1621,7 @@ function renderTable(data) {
       </td>
       <td>
         <div class="stars-bar">
-          <div class="bar" style="width: ${(fw.stars / 56091) * 120}px; background: ${fw.stars > 40000 ? 'var(--accent-amber)' : fw.stars > 20000 ? 'var(--accent-blue)' : 'var(--text-muted)'}"></div>
+          <div class="bar" style="width: ${(fw.stars / 54500) * 120}px; background: ${fw.stars > 40000 ? 'var(--accent-amber)' : fw.stars > 20000 ? 'var(--accent-blue)' : 'var(--text-muted)'}"></div>
           <span class="count">${(fw.stars / 1000).toFixed(1)}K</span>
         </div>
       </td>
@@ -1691,7 +1768,9 @@ function initCharts() {
           'rgba(239, 68, 68, 0.7)',    // ADK - red
           'rgba(6, 182, 212, 0.7)',    // Smolagents - cyan
           'rgba(236, 72, 153, 0.7)',   // Open-SWE - pink
-          'rgba(148, 163, 184, 0.7)'   // Claude - gray
+          'rgba(148, 163, 184, 0.7)',  // Claude - gray
+          'rgba(249, 115, 22, 0.7)',   // Deep Agents - orange
+          'rgba(34, 211, 238, 0.7)'    // Dapr Agents - teal
         ],
         borderRadius: 6,
         borderSkipped: false,
@@ -1782,7 +1861,7 @@ function initCharts() {
 
   // Protocol heatmap (as grouped bar)
   const heatCtx = document.getElementById('protocolHeatmap').getContext('2d');
-  const fwNames = ['AutoGen', 'CrewAI', 'LangGraph', 'OpenAI SDK', 'Google ADK', 'Smolagents', 'Open-SWE', 'Claude SDK'];
+  const fwNames = ['AutoGen', 'CrewAI', 'LangGraph', 'OpenAI SDK', 'Google ADK', 'Smolagents', 'Open-SWE', 'Claude SDK', 'Deep Agents', 'Dapr Agents'];
   new Chart(heatCtx, {
     type: 'bar',
     data: {
@@ -1790,25 +1869,25 @@ function initCharts() {
       datasets: [
         {
           label: 'MCP',
-          data: [5, 10, 10, 10, 10, 5, 0, 10],
+          data: [5, 10, 10, 10, 10, 5, 0, 10, 5, 5],
           backgroundColor: 'rgba(16, 185, 129, 0.6)',
           borderRadius: 4
         },
         {
           label: 'A2A',
-          data: [5, 10, 10, 0, 10, 0, 0, 0],
+          data: [5, 10, 10, 0, 10, 0, 0, 0, 0, 0],
           backgroundColor: 'rgba(139, 92, 246, 0.6)',
           borderRadius: 4
         },
         {
           label: 'AG-UI',
-          data: [0, 0, 10, 0, 10, 0, 0, 0],
+          data: [0, 0, 10, 0, 10, 0, 0, 0, 0, 0],
           backgroundColor: 'rgba(6, 182, 212, 0.6)',
           borderRadius: 4
         },
         {
           label: 'A2UI',
-          data: [0, 0, 0, 0, 10, 0, 0, 0],
+          data: [0, 0, 0, 0, 10, 0, 0, 0, 0, 0],
           backgroundColor: 'rgba(236, 72, 153, 0.6)',
           borderRadius: 4
         }
