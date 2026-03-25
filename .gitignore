@@ -6,3 +6,6 @@ HANDOFF_TEMPLATE.md
 node_modules/
 .env
 *.log
+screenshots/
+.claude/
+landscape-scan-*.md
