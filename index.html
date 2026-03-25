@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State of AI Agents — March 2026 | RyanHub Research</title>
+<meta name="description" content="Comprehensive interactive research report analyzing 8+ AI agent frameworks, protocol maturity, memory architectures, and market intelligence. March 2026.">
+<meta name="author" content="RyanHub Research Team">
+<meta property="og:title" content="State of AI Agents — March 2026">
+<meta property="og:description" content="Deep analysis of 8+ agent frameworks, MCP/A2A protocols, memory systems, and market trends.">
+<meta property="og:type" content="article">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg-primary: #0a0e17;
+    --bg-secondary: #111827;
+    --bg-card: #1a2234;
+    --bg-card-hover: #1f2a3f;
+    --border: #2a3548;
+    --border-active: #3b82f6;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-cyan: #06b6d4;
+    --accent-pink: #ec4899;
+    --accent-orange: #f97316;
+    --gradient-hero: linear-gradient(135deg, #0a0e17 0%, #1a1040 50%, #0a0e17 100%);
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Navigation ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(10, 14, 23, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav .logo {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+  nav .logo span { color: var(--accent-blue); }
+  nav .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  nav .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+  nav .nav-links a:hover { color: var(--text-primary); }
+
+  /* ─── Hero ─── */
+  .hero {
+    background: var(--gradient-hero);
+    padding: 8rem 2rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(139,92,246,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 999px;
+    padding: 0.35rem 1rem;
+    font-size: 0.78rem;
+    color: var(--accent-blue);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+
+  /* ─── Key Stats Row ─── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .stat-card {
+    background: rgba(26, 34, 52, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .stat-card .stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-card .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+
+  /* ─── Sections ─── */
+  section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  .section-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  /* ─── Framework Comparison Table ─── */
+  .table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-card);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  thead {
+    background: rgba(59,130,246,0.06);
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  th:hover { color: var(--accent-blue); }
+  th .sort-arrow {
+    margin-left: 4px;
+    opacity: 0.4;
+    font-size: 0.7rem;
+  }
+  th.sorted .sort-arrow { opacity: 1; color: var(--accent-blue); }
+  td {
+    padding: 0.85rem 1rem;
+    border-top: 1px solid rgba(42, 53, 72, 0.5);
+    vertical-align: middle;
+  }
+  tr:hover td {
+    background: rgba(59,130,246,0.03);
+  }
+  .fw-name {
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .fw-org {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .stars-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .stars-bar .bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--accent-blue);
+    transition: width 0.6s ease;
+  }
+  .stars-bar .count {
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .badge-yes {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--accent-green);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+  .badge-partial {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--accent-amber);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+  }
+  .badge-no {
+    background: rgba(239, 68, 68, 0.08);
+    color: var(--text-muted);
+    border: 1px solid rgba(100, 116, 139, 0.2);
+  }
+  .lang-tags {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+  .lang-tag {
+    font-size: 0.68rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+  }
+  .lang-py { background: rgba(59, 130, 246, 0.12); color: #60a5fa; }
+  .lang-ts { background: rgba(6, 182, 212, 0.12); color: #22d3ee; }
+  .lang-js { background: rgba(245, 158, 11, 0.12); color: #fbbf24; }
+  .lang-go { background: rgba(16, 185, 129, 0.12); color: #34d399; }
+  .lang-java { background: rgba(239, 68, 68, 0.12); color: #f87171; }
+  .lang-dotnet { background: rgba(139, 92, 246, 0.12); color: #a78bfa; }
+
+  /* ─── Framework Detail Cards ─── */
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .fw-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .fw-card:hover {
+    border-color: var(--border-active);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .fw-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .fw-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .fw-card-org {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+  .fw-card-stars {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-amber);
+  }
+  .fw-card-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .fw-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .fw-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.15);
+    color: var(--accent-blue);
+    font-weight: 500;
+  }
+  .fw-card-details {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .fw-card.expanded .fw-card-details { display: block; }
+  .fw-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .fw-detail-item {
+    font-size: 0.82rem;
+  }
+  .fw-detail-label {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+  .fw-detail-value {
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .strength-list, .weakness-list {
+    list-style: none;
+    margin-top: 0.75rem;
+  }
+  .strength-list li, .weakness-list li {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    padding: 0.25rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .strength-list li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+  .weakness-list li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: var(--accent-red);
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+  .expand-hint {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-align: right;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  /* ─── Protocol Section ─── */
+  .protocol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .protocol-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .protocol-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .protocol-card.mcp::before { background: var(--accent-green); }
+  .protocol-card.a2a::before { background: var(--accent-purple); }
+  .protocol-card.agui::before { background: var(--accent-cyan); }
+  .protocol-card.a2ui::before { background: var(--accent-pink); }
+  .protocol-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .protocol-full {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .maturity-bar {
+    height: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+  }
+  .maturity-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+  .maturity-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .protocol-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .protocol-stat {
+    font-size: 0.82rem;
+  }
+  .protocol-stat-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .protocol-stat-value {
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+
+  /* ─── Charts ─── */
+  .chart-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  .chart-wrapper {
+    position: relative;
+    height: 320px;
+  }
+  .chart-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  /* ─── Memory Comparison ─── */
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .memory-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .memory-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .memory-tier {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .tier-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .tier-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .memory-features {
+    list-style: none;
+  }
+  .memory-features li {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    padding: 0.2rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .memory-features li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
+  /* ─── Insights Section ─── */
+  .insight-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .insight-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    border-left: 3px solid var(--accent-blue);
+  }
+  .insight-card.warning { border-left-color: var(--accent-amber); }
+  .insight-card.opportunity { border-left-color: var(--accent-green); }
+  .insight-card.risk { border-left-color: var(--accent-red); }
+  .insight-number {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .insight-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .insight-body {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ─── Methodology ─── */
+  .method-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .method-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+  }
+  .method-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgba(59,130,246,0.15);
+    font-family: var(--font-mono);
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    line-height: 1;
+  }
+  .method-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .method-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  footer a {
+    color: var(--accent-blue);
+    text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
+    nav .nav-links { display: none; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+    section { padding: 3rem 1.25rem; }
+    .chart-row { grid-template-columns: 1fr; }
+    .framework-grid { grid-template-columns: 1fr; }
+    .fw-detail-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  /* ─── Animations ─── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-in {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  /* ─── Scrollbar ─── */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+  /* ─── Table filter buttons ─── */
+  .filter-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-sans);
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    background: rgba(59,130,246,0.06);
+  }
+
+  /* ─── Timeline ─── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin-top: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0.4rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 3px solid var(--accent-blue);
+  }
+  .timeline-date {
+    font-size: 0.72rem;
+    color: var(--accent-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.2rem;
+  }
+  .timeline-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .timeline-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ─── Divider ─── */
+  .section-divider {
+    max-width: 1200px;
+    margin: 0 auto;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">Ryan<span>Hub</span> Research</div>
+  <ul class="nav-links">
+    <li><a href="#landscape">Landscape</a></li>
+    <li><a href="#frameworks">Frameworks</a></li>
+    <li><a href="#protocols">Protocols</a></li>
+    <li><a href="#memory">Memory</a></li>
+    <li><a href="#insights">Insights</a></li>
+    <li><a href="#methodology">Methodology</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-badge">Research Report &middot; March 2026</div>
+  <h1>State of <em>AI Agents</em></h1>
+  <p class="subtitle">
+    A comprehensive analysis of 8 major agent frameworks, 4 interoperability protocols,
+    memory architectures, and market dynamics — based on deep technical evaluation.
+  </p>
+  <div class="stats-row">
+    <div class="stat-card animate-in delay-1">
+      <div class="stat-number" style="color: var(--accent-blue);">8</div>
+      <div class="stat-label">Frameworks Analyzed</div>
+    </div>
+    <div class="stat-card animate-in delay-2">
+      <div class="stat-number" style="color: var(--accent-green);">$8.5B</div>
+      <div class="stat-label">Market Size 2026</div>
+    </div>
+    <div class="stat-card animate-in delay-3">
+      <div class="stat-number" style="color: var(--accent-purple);">97M</div>
+      <div class="stat-label">MCP Monthly Downloads</div>
+    </div>
+    <div class="stat-card animate-in delay-4">
+      <div class="stat-number" style="color: var(--accent-amber);">243K+</div>
+      <div class="stat-label">Combined GitHub Stars</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ LANDSCAPE OVERVIEW ═══════════ -->
+<section id="landscape">
+  <div class="section-header">
+    <div class="section-label">Market Overview</div>
+    <h2 class="section-title">The Agent Landscape Has Exploded</h2>
+    <p class="section-desc">
+      The AI agent ecosystem crossed a critical threshold in early 2026. Every major tech company
+      now has a framework. Interoperability protocols (MCP, A2A) have moved from proposals to
+      production. The question is no longer "should we build agents?" but "which stack?"
+    </p>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-container">
+      <div class="chart-title">GitHub Stars by Framework</div>
+      <div class="chart-wrapper"><canvas id="starsChart"></canvas></div>
+    </div>
+    <div class="chart-container">
+      <div class="chart-title">Protocol Support Matrix</div>
+      <div class="chart-wrapper"><canvas id="protocolChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Key Timeline -->
+  <div class="chart-container" style="margin-top: 1.25rem;">
+    <div class="chart-title">Key Events — Q1 2026</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">January 2026</div>
+        <div class="timeline-title">MCP + A2A join Linux Foundation AAIF</div>
+        <div class="timeline-desc">OpenAI, Anthropic, Google, Microsoft, AWS co-found the Agentic AI Foundation. Protocol governance becomes vendor-neutral.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">February 2026</div>
+        <div class="timeline-title">Microsoft Agent Framework RC</div>
+        <div class="timeline-desc">AutoGen + Semantic Kernel merge into unified Microsoft Agent Framework. GA targeted end of Q1.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">March 2026</div>
+        <div class="timeline-title">MCP V2 shipping, Karpathy autoresearch (53K stars)</div>
+        <div class="timeline-desc">MCP V2 with expanded capabilities. Karpathy's autonomous ML experimentation repo reaches 53K stars in 18 days. LangChain relaunches Open-SWE.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">March 2026</div>
+        <div class="timeline-title">NVIDIA Agent Toolkit at GTC</div>
+        <div class="timeline-desc">OpenShell announced with 17 enterprise partners. Enterprise agent deployments accelerate.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">April 2026</div>
+        <div class="timeline-title">ICLR 2026 MemAgent Workshop</div>
+        <div class="timeline-desc">First dedicated academic workshop on agent memory systems (April 27). Signals academic recognition of memory as critical infrastructure.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ FRAMEWORK COMPARISON TABLE ═══════════ -->
+<section id="frameworks">
+  <div class="section-header">
+    <div class="section-label">Framework Analysis</div>
+    <h2 class="section-title">8 Frameworks, Deep Technical Evaluation</h2>
+    <p class="section-desc">
+      Each framework was evaluated across architecture, memory, orchestration, protocol support,
+      deployment options, and production readiness. Click column headers to sort. Click cards below for detailed analysis.
+    </p>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterFrameworks('all')">All</button>
+    <button class="filter-btn" onclick="filterFrameworks('mcp')">MCP Support</button>
+    <button class="filter-btn" onclick="filterFrameworks('a2a')">A2A Support</button>
+    <button class="filter-btn" onclick="filterFrameworks('enterprise')">Enterprise-Ready</button>
+    <button class="filter-btn" onclick="filterFrameworks('oss')">Fully Open Source</button>
+  </div>
+
+  <div class="table-container">
+    <table id="frameworkTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)" data-col="0">Framework <span class="sort-arrow">&#9650;</span></th>
+          <th onclick="sortTable(1)" data-col="1">Stars <span class="sort-arrow">&#9650;</span></th>
+          <th onclick="sortTable(2)" data-col="2">Architecture <span class="sort-arrow">&#9650;</span></th>
+          <th onclick="sortTable(3)" data-col="3">MCP <span class="sort-arrow">&#9650;</span></th>
+          <th onclick="sortTable(4)" data-col="4">A2A <span class="sort-arrow">&#9650;</span></th>
+          <th onclick="sortTable(5)" data-col="5">Languages <span class="sort-arrow">&#9650;</span></th>
+          <th onclick="sortTable(6)" data-col="6">License <span class="sort-arrow">&#9650;</span></th>
+        </tr>
+      </thead>
+      <tbody id="frameworkTableBody">
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Detailed Framework Cards -->
+  <div class="framework-grid" id="frameworkCards">
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ PROTOCOLS ═══════════ -->
+<section id="protocols">
+  <div class="section-header">
+    <div class="section-label">Interoperability Protocols</div>
+    <h2 class="section-title">The Protocol Stack Is Converging</h2>
+    <p class="section-desc">
+      Four protocols are forming the standard interoperability layer for AI agents. MCP leads adoption,
+      A2A is maturing fast, and AG-UI / A2UI are emerging for frontend integration.
+    </p>
+  </div>
+
+  <div class="protocol-grid">
+    <div class="protocol-card mcp">
+      <div class="protocol-name">MCP</div>
+      <div class="protocol-full">Model Context Protocol (Anthropic, 2024)</div>
+      <div class="maturity-bar"><div class="maturity-fill" style="width: 70%; background: var(--accent-green);"></div></div>
+      <div class="maturity-label"><span>Maturity</span><span>7 / 10</span></div>
+      <div class="protocol-stats">
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Monthly Downloads</div>
+          <div class="protocol-stat-value" style="color: var(--accent-green);">97M+</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Governance</div>
+          <div class="protocol-stat-value">Linux Foundation</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">SDK Languages</div>
+          <div class="protocol-stat-value">TS, Python</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Next Release</div>
+          <div class="protocol-stat-value">V2, March 2026</div>
+        </div>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 1rem; line-height: 1.5;">
+        The de facto standard for agent-to-tool communication. Every major framework now supports MCP natively or via adapters. Under Linux Foundation's AAIF with all major AI companies as co-founders.
+      </p>
+    </div>
+
+    <div class="protocol-card a2a">
+      <div class="protocol-name">A2A</div>
+      <div class="protocol-full">Agent-to-Agent Protocol (Google, 2025)</div>
+      <div class="maturity-bar"><div class="maturity-fill" style="width: 50%; background: var(--accent-purple);"></div></div>
+      <div class="maturity-label"><span>Maturity</span><span>5 / 10</span></div>
+      <div class="protocol-stats">
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Organizations</div>
+          <div class="protocol-stat-value" style="color: var(--accent-purple);">150+</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Version</div>
+          <div class="protocol-stat-value">0.3</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Transports</div>
+          <div class="protocol-stat-value">gRPC, HTTP, JSON-RPC</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Blocker</div>
+          <div class="protocol-stat-value" style="color: var(--accent-amber);">No TS SDK</div>
+        </div>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 1rem; line-height: 1.5;">
+        Horizontal agent-to-agent communication. Pre-1.0 but already deployed at Tyson Foods and Adobe. Signed security cards and well-defined task lifecycle. Missing TypeScript SDK is a blocker for many teams.
+      </p>
+    </div>
+
+    <div class="protocol-card agui">
+      <div class="protocol-name">AG-UI</div>
+      <div class="protocol-full">Agent-User Interface Protocol</div>
+      <div class="maturity-bar"><div class="maturity-fill" style="width: 30%; background: var(--accent-cyan);"></div></div>
+      <div class="maturity-label"><span>Maturity</span><span>3 / 10</span></div>
+      <div class="protocol-stats">
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Status</div>
+          <div class="protocol-stat-value" style="color: var(--accent-cyan);">Emerging</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Key Adopter</div>
+          <div class="protocol-stat-value">CopilotKit</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Supported By</div>
+          <div class="protocol-stat-value">LangGraph, ADK</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Focus</div>
+          <div class="protocol-stat-value">Frontend streaming</div>
+        </div>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 1rem; line-height: 1.5;">
+        Standardizes how agent backends stream state to frontend UIs. Early stage but addresses a real gap — every team currently builds custom websocket/SSE bridges.
+      </p>
+    </div>
+
+    <div class="protocol-card a2ui">
+      <div class="protocol-name">A2UI</div>
+      <div class="protocol-full">Agent-to-UI (Google, 2025)</div>
+      <div class="maturity-bar"><div class="maturity-fill" style="width: 25%; background: var(--accent-pink);"></div></div>
+      <div class="maturity-label"><span>Maturity</span><span>2.5 / 10</span></div>
+      <div class="protocol-stats">
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Status</div>
+          <div class="protocol-stat-value" style="color: var(--accent-pink);">v0.8 Spec</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Creator</div>
+          <div class="protocol-stat-value">Google</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Supported By</div>
+          <div class="protocol-stat-value">Google ADK</div>
+        </div>
+        <div class="protocol-stat">
+          <div class="protocol-stat-label">Focus</div>
+          <div class="protocol-stat-value">Generative UI</div>
+        </div>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 1rem; line-height: 1.5;">
+        Google's spec for agents generating dynamic UI components. Standard component library integrated into ADK. Currently Google-only adoption — too early to evaluate ecosystem traction.
+      </p>
+    </div>
+  </div>
+
+  <!-- Protocol support heatmap -->
+  <div class="chart-container" style="margin-top: 1.25rem;">
+    <div class="chart-title">Protocol Support by Framework</div>
+    <div class="chart-wrapper"><canvas id="protocolHeatmap"></canvas></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ MEMORY ═══════════ -->
+<section id="memory">
+  <div class="section-header">
+    <div class="section-label">Memory Architectures</div>
+    <h2 class="section-title">Memory Is the Next Battleground</h2>
+    <p class="section-desc">
+      Agent memory determines whether agents can learn, adapt, and maintain context across sessions.
+      Approaches range from simple checkpoint stores to sophisticated LLM-powered memory systems.
+      The ICLR 2026 MemAgent Workshop (April 27) signals academic recognition of this critical gap.
+    </p>
+  </div>
+
+  <div class="memory-grid" id="memoryGrid">
+  </div>
+
+  <div class="chart-container" style="margin-top: 1.25rem;">
+    <div class="chart-title">Memory Capability Comparison</div>
+    <div class="chart-wrapper"><canvas id="memoryChart"></canvas></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ KEY INSIGHTS ═══════════ -->
+<section id="insights">
+  <div class="section-header">
+    <div class="section-label">Strategic Insights</div>
+    <h2 class="section-title">What We Learned</h2>
+    <p class="section-desc">
+      Eight deep dives, 4 protocol assessments, and 3 months of continuous monitoring distilled into
+      the insights that matter most for teams building agent systems today.
+    </p>
+  </div>
+
+  <div class="insight-cards">
+    <div class="insight-card opportunity">
+      <div class="insight-number">Insight 01</div>
+      <div class="insight-title">Protocol convergence is real and accelerating</div>
+      <div class="insight-body">
+        MCP + A2A under Linux Foundation governance means the protocol stack is no longer a bet — it's becoming infrastructure.
+        Teams that don't adopt MCP by mid-2026 will be excluded from the emerging tool ecosystem. 97M monthly downloads speaks louder than any specification.
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-number">Insight 02</div>
+      <div class="insight-title">No framework wins on all axes — pick your tradeoff</div>
+      <div class="insight-body">
+        LangGraph leads production readiness. Google ADK leads protocol completeness (all 4 protocols). CrewAI leads approachability.
+        OpenAI Agents SDK leads simplicity. AutoGen leads community size. The "best" framework depends entirely on your constraints.
+      </div>
+    </div>
+
+    <div class="insight-card warning">
+      <div class="insight-number">Insight 03</div>
+      <div class="insight-title">Memory systems are immature across the board</div>
+      <div class="insight-body">
+        No framework has production-grade long-term memory. CrewAI's unified memory is the most sophisticated but unproven at scale.
+        Every framework either lacks cross-session persistence, semantic search, or memory pruning. This is where the most research investment is needed (confirmed by ICLR 2026 MemAgent Workshop).
+      </div>
+    </div>
+
+    <div class="insight-card risk">
+      <div class="insight-number">Insight 04</div>
+      <div class="insight-title">Agents are great at bugs, bad at features</div>
+      <div class="insight-body">
+        FeatureBench (March 2026) shows agents solve 74% of bug tasks but only 11% of feature tasks. SWE-Skills-Bench found only 7/49 agent skills
+        actually help in practice. The gap between agent hype and capability is widest on creative, multi-step feature work.
+      </div>
+    </div>
+
+    <div class="insight-card opportunity">
+      <div class="insight-number">Insight 05</div>
+      <div class="insight-title">The organizational orchestration layer is wide open</div>
+      <div class="insight-body">
+        Every framework focuses on task-level orchestration (run this workflow). Nobody addresses organizational orchestration (persistent agents with identity, career-spanning memory, human-org integration).
+        This is a genuine whitespace. The closest approach is file-based memory validated by ICLR 2026's "Codified Context" research.
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-number">Insight 06</div>
+      <div class="insight-title">Autonomous loops are the new paradigm</div>
+      <div class="insight-body">
+        Karpathy's autoresearch (53K stars in 18 days) proved that autonomous experiment loops work at scale — 700 experiments, 20 improvements, found bugs in hand-tuned code.
+        Shopify independently validated: 53% faster rendering, 61% fewer memory allocations. The "Loopy Era" is here.
+      </div>
+    </div>
+
+    <div class="insight-card warning">
+      <div class="insight-number">Insight 07</div>
+      <div class="insight-title">Enterprise fragmentation creates lock-in risk</div>
+      <div class="insight-body">
+        Microsoft is merging 3 frameworks (AutoGen + Semantic Kernel + Agent Framework). Google's ADK is best on GCP. Every vendor's
+        "open source" framework works best with their cloud. True vendor-neutral production deployment remains difficult.
+      </div>
+    </div>
+
+    <div class="insight-card risk">
+      <div class="insight-number">Insight 08</div>
+      <div class="insight-title">Security is an afterthought everywhere</div>
+      <div class="insight-body">
+        The Corba vulnerability showed 79-100% of AutoGen agents can be blocked in 1.6-1.9 turns. No framework has built-in
+        governance, audit trails, or execution-aware safety. As agents gain more autonomy, this gap becomes critical. Agent security is 2016-era web security.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ METHODOLOGY ═══════════ -->
+<section id="methodology">
+  <div class="section-header">
+    <div class="section-label">Research Methodology</div>
+    <h2 class="section-title">How This Report Was Produced</h2>
+    <p class="section-desc">
+      This report was produced by an AI research team using a multi-agent orchestration system.
+      Each framework analysis involved source code review, documentation study, community sentiment analysis,
+      and cross-referencing with academic publications.
+    </p>
+  </div>
+
+  <div class="method-steps">
+    <div class="method-step">
+      <div class="method-number">01</div>
+      <div class="method-title">Source Identification</div>
+      <div class="method-desc">
+        GitHub repositories, official documentation, release notes, changelogs, blog posts, and academic papers for each framework.
+        Community signals from Hacker News, Reddit, and Discord.
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-number">02</div>
+      <div class="method-title">Deep Technical Evaluation</div>
+      <div class="method-desc">
+        Each framework evaluated across 6 dimensions: architecture, memory, orchestration, protocol support, deployment, and community.
+        Verified claims against actual source code and issues.
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-number">03</div>
+      <div class="method-title">Cross-Reference & Synthesis</div>
+      <div class="method-desc">
+        Findings cross-referenced across frameworks to identify patterns, gaps, and genuine differentiators.
+        Protocol maturity assessed via SDK downloads, enterprise adoption, and specification completeness.
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-number">04</div>
+      <div class="method-title">Insight Extraction</div>
+      <div class="method-desc">
+        Strategic insights derived from patterns across all evaluations. Validated against market data (Gartner, MarketsAndMarkets),
+        academic research (ICLR 2026, IMWUT), and enterprise case studies.
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-container" style="margin-top: 2rem;">
+    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7;">
+      <strong style="color: var(--text-primary);">About the research team.</strong>
+      This report was produced by RyanHub's AI Research Lead as part of an ongoing landscape monitoring program.
+      All data points are sourced from public information as of March 24, 2026. Framework evaluations represent
+      a snapshot in time — the agent ecosystem moves fast.
+      <br><br>
+      <strong style="color: var(--text-primary);">Limitations.</strong>
+      Benchmarks are self-reported by framework authors unless otherwise noted. GitHub stars are an imperfect
+      proxy for adoption. Enterprise deployment numbers are typically not public. We do not evaluate cost
+      (API pricing varies too much by use case). Memory evaluations are based on documented capabilities,
+      not load testing.
+      <br><br>
+      <strong style="color: var(--text-primary);">Updates.</strong>
+      This report is updated on a weekly cadence. For corrections or additions, open an issue on GitHub.
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div>
+    <strong style="color: var(--text-primary);">State of AI Agents — March 2026</strong>
+    &middot; Published by <a href="https://github.com/zzwang-ai" target="_blank">RyanHub Research</a>
+  </div>
+  <div>
+    Data as of March 24, 2026 &middot; <a href="https://github.com/zzwang-ai/state-of-ai-agents" target="_blank">Source on GitHub</a>
+  </div>
+</footer>
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+// ─── Framework Data ───
+const frameworks = [
+  {
+    name: 'AutoGen / AG2',
+    org: 'Microsoft / AG2.ai',
+    stars: 56091,
+    arch: 'Actor Model / GroupChat',
+    mcp: 'partial', // via adapters
+    a2a: 'partial', // via MS Agent Framework
+    agui: false,
+    a2ui: false,
+    langs: ['Python', '.NET'],
+    license: 'CC-BY-4.0 / Apache 2.0',
+    enterprise: false,
+    oss: true,
+    desc: 'The most starred agent framework. Microsoft\'s AutoGen 0.4 introduced an actor-model rewrite, now merging into Microsoft Agent Framework. AG2 is the community fork continuing the original architecture.',
+    strengths: [
+      'Largest community (56K stars, 530+ contributors)',
+      'AutoGen Studio: visual no-code workflow builder',
+      '.NET + Python support (most frameworks are Python-only)',
+      'Actor-model distributed runtime for scaling',
+      'Academic pedigree (Microsoft Research origin)'
+    ],
+    weaknesses: [
+      'GroupChat is expensive (N agents * M rounds * growing context)',
+      'No first-party observability or enterprise security',
+      'Ecosystem fragmented: AG2 vs AutoGen vs MS Agent Framework',
+      'Auto speaker selection unreliable for complex workflows',
+      'Corba vulnerability: 79-100% agents blocked in 1.6-1.9 turns'
+    ],
+    memory: 'Teachability: vector DB-backed persistent memos. Not sophisticated — no episodic/semantic separation. 90% retention, <200ms latency.',
+    orchestration: 'Sequential Chat, Group Chat (4 selection modes), Nested Chat, Swarm. GroupChat Manager is centralized bottleneck.'
+  },
+  {
+    name: 'CrewAI',
+    org: 'CrewAI Inc.',
+    stars: 47000,
+    arch: 'Role-Based Crews',
+    mcp: 'yes',
+    a2a: 'yes',
+    agui: false,
+    a2ui: false,
+    langs: ['Python'],
+    license: 'MIT',
+    enterprise: true,
+    oss: true,
+    desc: 'Role-based agent framework with the most approachable API. YAML-first configuration for rapid iteration. First framework to ship native MCP + A2A support. Enterprise tier includes HIPAA + SOC 2.',
+    strengths: [
+      'Lowest learning curve of major frameworks',
+      'YAML-first config for rapid iteration',
+      'Unified memory with LLM-powered analysis (most sophisticated)',
+      'First-class MCP + A2A (native, not adapters)',
+      'Enterprise customers: DocuSign, US DoD, IBM Consulting'
+    ],
+    weaknesses: [
+      'Hierarchical process buggy (manager delegation fails)',
+      'Higher token consumption (role-playing prompts + ReAct overhead)',
+      'Debugging painful (no reliable per-task logging)',
+      'Consensual process still vaporware after 2+ years',
+      'Python-only (no TypeScript SDK)',
+      'Steep pricing jump (Free → $6K/yr gap)'
+    ],
+    memory: 'Unified Memory (v1.8+) with LanceDB. LLM-powered analysis on save. Adaptive recall: shallow (vector, ~200ms) or deep (multi-step RecallFlow). Consolidation at 0.85 similarity. 11+ embedder providers.',
+    orchestration: 'Sequential, Hierarchical (buggy), Flows (event-driven @start/@listen/@router). Flows sit above Crews for cross-crew orchestration.'
+  },
+  {
+    name: 'LangGraph',
+    org: 'LangChain Inc.',
+    stars: 27271,
+    arch: 'Graph-Based State Machine',
+    mcp: 'yes',
+    a2a: 'yes',
+    agui: true,
+    a2ui: false,
+    langs: ['Python', 'TypeScript'],
+    license: 'MIT',
+    enterprise: true,
+    oss: true,
+    desc: 'The most production-proven framework. Graph-based state machines with cyclic support, checkpointing, and time-travel debugging. Klarna (85M users), Replit, and Elastic run LangGraph in production.',
+    strengths: [
+      'Cyclic graph support (not just DAGs)',
+      'Fine-grained human-in-the-loop (interrupt_before/after, breakpoints)',
+      'Time-travel debugging (replay from any checkpoint)',
+      '30-40% lower latency vs CrewAI/AutoGen on complex workflows',
+      'Most production-proven (Klarna, Replit, Elastic at scale)',
+      'LangGraph Studio: visual agent IDE'
+    ],
+    weaknesses: [
+      'Steep learning curve (graph mental model + state handling)',
+      'Large graphs slow down, memory usage climbs',
+      'Production ops require external systems (retries, monitoring)',
+      'LangChain ecosystem lock-in',
+      'State must be well-defined upfront — rigid for dynamic agent networks',
+      'Developer-encoded graph limits true agent autonomy'
+    ],
+    memory: 'Checkpoint-based (MemorySaver, Postgres, Redis). Long-term via cross-thread memory stores with vector search. Thread-based isolation.',
+    orchestration: 'Supervisor pattern, hierarchical teams, conditional routing, parallel execution, subgraph composition. Most flexible orchestration model.'
+  },
+  {
+    name: 'OpenAI Agents SDK',
+    org: 'OpenAI',
+    stars: 20200,
+    arch: 'Agent Loop (5 Primitives)',
+    mcp: 'yes',
+    a2a: false,
+    agui: false,
+    a2ui: false,
+    langs: ['Python', 'TypeScript'],
+    license: 'MIT',
+    enterprise: false,
+    oss: true,
+    desc: 'Radically simple — only 5 primitives (Agents, Handoffs, Guardrails, Sessions, Tracing). Best-in-class handoff pattern evolved from Swarm. Despite OpenAI branding, supports 100+ LLMs via Chat Completions API.',
+    strengths: [
+      'Radical simplicity: 5 primitives, minimal abstraction',
+      'Model-agnostic (100+ LLMs despite OpenAI branding)',
+      'Best-in-class agent handoff pattern (from Swarm heritage)',
+      'Built-in guardrails: input/output validation, PII masking, jailbreak detection',
+      'Built-in tracing with OpenAI Dashboard integration',
+      'Native voice agents (RealtimeAgent) — unique in category'
+    ],
+    weaknesses: [
+      'No native persistent memory (Sessions ephemeral by default)',
+      'No parallel agent execution (single-agent sequential)',
+      'No managed deployment (library-only)',
+      'No A2A support',
+      'Shallow orchestration compared to LangGraph',
+      'Best experience still requires OpenAI models'
+    ],
+    memory: 'Sessions (SQLite/Redis). No native long-term memory — must integrate Mem0, Zep, or Pinecone externally. Conversation history managed via Sessions.',
+    orchestration: 'LLM-driven (dynamic routing) or code-driven (deterministic). Handoffs transfer conversation ownership. Agents-as-tools for bounded subtasks.'
+  },
+  {
+    name: 'Google ADK',
+    org: 'Google',
+    stars: 18500,
+    arch: 'Event-Driven Hierarchical',
+    mcp: 'yes',
+    a2a: 'yes',
+    agui: true,
+    a2ui: true,
+    langs: ['Python', 'TypeScript', 'Java', 'Go'],
+    license: 'Apache 2.0',
+    enterprise: true,
+    oss: true,
+    desc: 'The most protocol-complete framework — supports all 4 protocols (MCP + A2A + AG-UI + A2UI). ADK 2.0 Alpha introduces graph-based workflows. 4 languages, deepest GCP integration.',
+    strengths: [
+      'Only framework natively supporting all 4 protocols',
+      'Multi-language: Python + TypeScript + Java + Go (broadest)',
+      'ADK 2.0: advanced deterministic graph workflow engine',
+      'Memory Bank: Gemini-powered semantic extraction',
+      '70+ pre-built integrations (Stripe, GitHub, MongoDB, etc.)',
+      'Computer Use: built-in tool for operating UI elements'
+    ],
+    weaknesses: [
+      'Best features require GCP (Memory Bank, Agent Engine)',
+      'Agent Engine Python-only for managed deployment',
+      'Tool mutual exclusivity bugs',
+      'Strict folder structure with unhelpful error messages',
+      'ADK 2.0 breaking changes (Alpha, incompatible storage)',
+      'Complexity: many moving parts, steeper learning curve'
+    ],
+    memory: 'Three-layer: Session (history) → State (key-value, scoped prefixes) → Memory (cross-session). Memory Bank uses Gemini for async fact extraction. Scoped to user identity.',
+    orchestration: 'SequentialAgent, ParallelAgent, LoopAgent. LLM-driven transfer. ADK 2.0: graph-based with routing, fan-out/fan-in, retry, dynamic nodes.'
+  },
+  {
+    name: 'Smolagents',
+    org: 'Hugging Face',
+    stars: 26000,
+    arch: 'Code-First',
+    mcp: 'partial',
+    a2a: false,
+    agui: false,
+    a2ui: false,
+    langs: ['Python'],
+    license: 'Apache 2.0',
+    enterprise: false,
+    oss: true,
+    desc: 'Code-first framework where agents write Python instead of JSON tool calls. Integrated with the Hugging Face Hub ecosystem. Models generate executable code, not structured actions.',
+    strengths: [
+      'Code-first: agents write Python (more expressive than JSON)',
+      'Deep Hugging Face Hub integration (models, datasets, spaces)',
+      'Lightweight — minimal dependencies',
+      'Open-weight model friendly',
+      'Active community (26K stars)'
+    ],
+    weaknesses: [
+      'No native A2A support',
+      'Limited orchestration patterns',
+      'Code execution security concerns',
+      'Less mature than LangGraph/CrewAI for production',
+      'MCP support is partial'
+    ],
+    memory: 'Basic conversation history. No sophisticated long-term memory. Relies on Hub ecosystem for model storage.',
+    orchestration: 'Code-based agent loops. Multi-agent possible but not first-class. Less structured than graph or crew-based approaches.'
+  },
+  {
+    name: 'Open-SWE',
+    org: 'LangChain',
+    stars: 8178,
+    arch: '3-Layer Composition',
+    mcp: false,
+    a2a: false,
+    agui: false,
+    a2ui: false,
+    langs: ['Python', 'TypeScript'],
+    license: 'MIT',
+    enterprise: false,
+    oss: true,
+    desc: 'Async coding agent built on Deep Agents + LangGraph. Works like a team member — assign a task via Slack/Linear/GitHub, get a PR back. Inspired by Stripe Minions and Ramp Inspect.',
+    strengths: [
+      'Async-first: assign task, get PR back (not copilot)',
+      'Composition over forking (Deep Agents + LangGraph)',
+      'Enterprise integrations: Slack + Linear + GitHub webhooks',
+      'Pluggable sandboxes: 4 providers, no vendor lock-in',
+      'Mid-execution feedback (double texting for course correction)'
+    ],
+    weaknesses: [
+      'No MCP or A2A protocol support',
+      'Only 15 contributors (2 dominate)',
+      'No SWE-bench scores published',
+      'Overhead for simple tasks (heavy planning/review cycle)',
+      'No native cross-session persistent memory',
+      'Young project (May 2025), still experimental'
+    ],
+    memory: 'No native long-term memory. AGENTS.md injection for repo context. Context compression: large content offloaded to filesystem. Cross-thread memory via LangGraph Memory Store.',
+    orchestration: 'Manager → Planner → Programmer → Reviewer loop. Subagent spawning via task tool. Double-texting for human injection mid-execution.'
+  },
+  {
+    name: 'Claude Agent SDK',
+    org: 'Anthropic',
+    stars: 6000,
+    arch: 'Computer-Access-First',
+    mcp: 'yes',
+    a2a: false,
+    agui: false,
+    a2ui: false,
+    langs: ['Python'],
+    license: 'MIT',
+    enterprise: false,
+    oss: true,
+    desc: 'Anthropic\'s agent SDK focused on computer use and tool integration. Claude-only but deeply integrated with MCP. Optimized for computer-access tasks like browser control and desktop automation.',
+    strengths: [
+      'Deep MCP integration (Anthropic created MCP)',
+      'Computer use capabilities built-in',
+      'Strong safety/alignment features',
+      'Claude model quality advantage for complex reasoning',
+      'Clean, well-documented API'
+    ],
+    weaknesses: [
+      'Claude-only (no other model support)',
+      'Smallest community (6K stars)',
+      'No A2A support',
+      'Python-only',
+      'Narrow focus compared to general-purpose frameworks',
+      'Limited orchestration patterns'
+    ],
+    memory: 'Basic conversation management. Relies on MCP for tool integration. No built-in long-term memory system.',
+    orchestration: 'Single-agent focused. Multi-agent possible via MCP but not first-class. Less mature orchestration than competitors.'
+  }
+];
+
+// ─── Render Framework Table ───
+function renderTable(data) {
+  const tbody = document.getElementById('frameworkTableBody');
+  tbody.innerHTML = data.map(fw => `
+    <tr data-mcp="${fw.mcp}" data-a2a="${fw.a2a === 'yes'}" data-enterprise="${fw.enterprise}" data-oss="${fw.oss}">
+      <td>
+        <div class="fw-name">${fw.name}</div>
+        <div class="fw-org">${fw.org}</div>
+      </td>
+      <td>
+        <div class="stars-bar">
+          <div class="bar" style="width: ${(fw.stars / 56091) * 120}px; background: ${fw.stars > 40000 ? 'var(--accent-amber)' : fw.stars > 20000 ? 'var(--accent-blue)' : 'var(--text-muted)'}"></div>
+          <span class="count">${(fw.stars / 1000).toFixed(1)}K</span>
+        </div>
+      </td>
+      <td style="font-size: 0.82rem; color: var(--text-secondary)">${fw.arch}</td>
+      <td><span class="badge badge-${fw.mcp === 'yes' ? 'yes' : fw.mcp === 'partial' ? 'partial' : 'no'}">${fw.mcp === 'yes' ? 'Native' : fw.mcp === 'partial' ? 'Adapter' : 'No'}</span></td>
+      <td><span class="badge badge-${fw.a2a === 'yes' ? 'yes' : fw.a2a === 'partial' ? 'partial' : 'no'}">${fw.a2a === 'yes' ? 'Native' : fw.a2a === 'partial' ? 'Adapter' : 'No'}</span></td>
+      <td>
+        <div class="lang-tags">
+          ${fw.langs.map(l => `<span class="lang-tag lang-${l.toLowerCase().replace('.net', 'dotnet')}">${l}</span>`).join('')}
+        </div>
+      </td>
+      <td style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono);">${fw.license}</td>
+    </tr>
+  `).join('');
+}
+
+// ─── Render Framework Cards ───
+function renderCards(data) {
+  const container = document.getElementById('frameworkCards');
+  container.innerHTML = data.map((fw, i) => `
+    <div class="fw-card" onclick="this.classList.toggle('expanded')" data-mcp="${fw.mcp}" data-a2a="${fw.a2a === 'yes'}" data-enterprise="${fw.enterprise}" data-oss="${fw.oss}">
+      <div class="fw-card-header">
+        <div>
+          <div class="fw-card-title">${fw.name}</div>
+          <div class="fw-card-org">${fw.org}</div>
+        </div>
+        <div class="fw-card-stars">${(fw.stars / 1000).toFixed(1)}K &#9733;</div>
+      </div>
+      <div class="fw-card-desc">${fw.desc}</div>
+      <div class="fw-card-tags">
+        ${fw.mcp === 'yes' ? '<span class="fw-tag" style="border-color: rgba(16,185,129,0.3); color: var(--accent-green); background: rgba(16,185,129,0.08);">MCP Native</span>' : fw.mcp === 'partial' ? '<span class="fw-tag" style="border-color: rgba(245,158,11,0.3); color: var(--accent-amber); background: rgba(245,158,11,0.08);">MCP Adapter</span>' : ''}
+        ${fw.a2a === 'yes' ? '<span class="fw-tag" style="border-color: rgba(139,92,246,0.3); color: var(--accent-purple); background: rgba(139,92,246,0.08);">A2A Native</span>' : fw.a2a === 'partial' ? '<span class="fw-tag" style="border-color: rgba(245,158,11,0.3); color: var(--accent-amber); background: rgba(245,158,11,0.08);">A2A Adapter</span>' : ''}
+        ${fw.agui ? '<span class="fw-tag" style="border-color: rgba(6,182,212,0.3); color: var(--accent-cyan); background: rgba(6,182,212,0.08);">AG-UI</span>' : ''}
+        ${fw.a2ui ? '<span class="fw-tag" style="border-color: rgba(236,72,153,0.3); color: var(--accent-pink); background: rgba(236,72,153,0.08);">A2UI</span>' : ''}
+        ${fw.enterprise ? '<span class="fw-tag">Enterprise</span>' : ''}
+        ${fw.langs.map(l => `<span class="fw-tag" style="opacity: 0.7;">${l}</span>`).join('')}
+      </div>
+      <div class="expand-hint">Click to expand details</div>
+      <div class="fw-card-details">
+        <div class="fw-detail-grid">
+          <div class="fw-detail-item">
+            <div class="fw-detail-label">Memory</div>
+            <div class="fw-detail-value">${fw.memory}</div>
+          </div>
+          <div class="fw-detail-item">
+            <div class="fw-detail-label">Orchestration</div>
+            <div class="fw-detail-value">${fw.orchestration}</div>
+          </div>
+        </div>
+        <div style="margin-top: 1rem;">
+          <div class="fw-detail-label" style="margin-bottom: 0.3rem;">Strengths</div>
+          <ul class="strength-list">
+            ${fw.strengths.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+        <div style="margin-top: 0.75rem;">
+          <div class="fw-detail-label" style="margin-bottom: 0.3rem;">Weaknesses</div>
+          <ul class="weakness-list">
+            ${fw.weaknesses.map(w => `<li>${w}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── Table Sorting ───
+let sortCol = -1, sortDir = 1;
+function sortTable(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = 1; }
+
+  document.querySelectorAll('th').forEach(th => th.classList.remove('sorted'));
+  document.querySelector(`th[data-col="${col}"]`).classList.add('sorted');
+  document.querySelector(`th[data-col="${col}"] .sort-arrow`).textContent = sortDir === 1 ? '\u25B2' : '\u25BC';
+
+  const sorted = [...frameworks].sort((a, b) => {
+    const keys = ['name', 'stars', 'arch', 'mcp', 'a2a', 'langs', 'license'];
+    let va = keys[col] === 'stars' ? a.stars : keys[col] === 'langs' ? a.langs.length : String(a[keys[col]]);
+    let vb = keys[col] === 'stars' ? b.stars : keys[col] === 'langs' ? b.langs.length : String(b[keys[col]]);
+    if (typeof va === 'number') return (va - vb) * sortDir;
+    return String(va).localeCompare(String(vb)) * sortDir;
+  });
+  renderTable(sorted);
+}
+
+// ─── Framework Filtering ───
+function filterFrameworks(filter) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const filtered = filter === 'all' ? frameworks :
+    filter === 'mcp' ? frameworks.filter(f => f.mcp === 'yes' || f.mcp === 'partial') :
+    filter === 'a2a' ? frameworks.filter(f => f.a2a === 'yes' || f.a2a === 'partial') :
+    filter === 'enterprise' ? frameworks.filter(f => f.enterprise) :
+    filter === 'oss' ? frameworks.filter(f => f.oss) :
+    frameworks;
+
+  renderTable(filtered);
+  renderCards(filtered);
+}
+
+// ─── Memory Grid Data ───
+const memoryData = [
+  { name: 'CrewAI', tier: 'Advanced', color: 'var(--accent-green)', features: ['Unified Memory with LLM-powered analysis', 'LanceDB vector storage', 'Adaptive recall (shallow ~200ms, deep multi-step)', 'Auto-consolidation at 0.85 similarity', '11+ embedder providers', 'Privacy flags & source tagging'] },
+  { name: 'Google ADK', tier: 'Advanced', color: 'var(--accent-green)', features: ['Three-layer model (Session → State → Memory)', 'Scoped state prefixes (user:, app:, temp:)', 'Memory Bank: Gemini-powered fact extraction', 'PostgreSQL/MySQL/SQLite sessions', 'Cross-session personalization', 'output_key for automatic state chaining'] },
+  { name: 'LangGraph', tier: 'Intermediate', color: 'var(--accent-amber)', features: ['Checkpoint-based (Postgres, Redis)', 'Thread-based isolation', 'Cross-thread memory stores with vector search', 'Time-travel debugging via checkpoints', 'No native long-term semantic memory'] },
+  { name: 'AutoGen / AG2', tier: 'Basic', color: 'var(--accent-amber)', features: ['Teachability: vector DB-backed memos', 'Retrieved into context as needed', 'No episodic/semantic separation', 'No memory pruning mechanism', '90% retention, <200ms latency'] },
+  { name: 'OpenAI Agents SDK', tier: 'Minimal', color: 'var(--accent-red)', features: ['Sessions (SQLite/Redis)', 'Ephemeral by default', 'No native long-term memory', 'Must integrate Mem0, Zep, or Pinecone', 'Conversation history only'] },
+  { name: 'Open-SWE', tier: 'Minimal', color: 'var(--accent-red)', features: ['No native long-term memory', 'AGENTS.md for repo context injection', 'Context compression to filesystem', 'Cross-thread via LangGraph Store', 'File-based offloading for large content'] }
+];
+
+function renderMemoryGrid() {
+  const grid = document.getElementById('memoryGrid');
+  grid.innerHTML = memoryData.map(m => `
+    <div class="memory-card">
+      <div class="memory-card-title">${m.name}</div>
+      <div class="memory-tier">
+        <div class="tier-dot" style="background: ${m.color}"></div>
+        <span class="tier-label" style="color: ${m.color}">${m.tier}</span>
+      </div>
+      <ul class="memory-features">
+        ${m.features.map(f => `<li>${f}</li>`).join('')}
+      </ul>
+    </div>
+  `).join('');
+}
+
+// ─── Charts ───
+function initCharts() {
+  // Stars chart
+  const starsCtx = document.getElementById('starsChart').getContext('2d');
+  new Chart(starsCtx, {
+    type: 'bar',
+    data: {
+      labels: frameworks.map(f => f.name),
+      datasets: [{
+        data: frameworks.map(f => f.stars),
+        backgroundColor: [
+          'rgba(245, 158, 11, 0.7)',  // AutoGen - amber
+          'rgba(139, 92, 246, 0.7)',   // CrewAI - purple
+          'rgba(59, 130, 246, 0.7)',   // LangGraph - blue
+          'rgba(16, 185, 129, 0.7)',   // OpenAI - green
+          'rgba(239, 68, 68, 0.7)',    // ADK - red
+          'rgba(6, 182, 212, 0.7)',    // Smolagents - cyan
+          'rgba(236, 72, 153, 0.7)',   // Open-SWE - pink
+          'rgba(148, 163, 184, 0.7)'   // Claude - gray
+        ],
+        borderRadius: 6,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${(ctx.raw / 1000).toFixed(1)}K stars`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(42, 53, 72, 0.5)' },
+          ticks: { color: '#64748b', callback: v => (v/1000) + 'K' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#94a3b8', font: { size: 11, weight: '600' } }
+        }
+      }
+    }
+  });
+
+  // Protocol support chart
+  const protocolCtx = document.getElementById('protocolChart').getContext('2d');
+  new Chart(protocolCtx, {
+    type: 'radar',
+    data: {
+      labels: ['MCP', 'A2A', 'AG-UI', 'A2UI', 'Enterprise Deploy', 'Multi-Language'],
+      datasets: [
+        {
+          label: 'Google ADK',
+          data: [10, 10, 10, 10, 10, 10],
+          borderColor: 'rgba(239, 68, 68, 0.8)',
+          backgroundColor: 'rgba(239, 68, 68, 0.1)',
+          pointBackgroundColor: 'rgba(239, 68, 68, 0.8)',
+        },
+        {
+          label: 'LangGraph',
+          data: [10, 10, 10, 0, 10, 7],
+          borderColor: 'rgba(59, 130, 246, 0.8)',
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          pointBackgroundColor: 'rgba(59, 130, 246, 0.8)',
+        },
+        {
+          label: 'CrewAI',
+          data: [10, 10, 0, 0, 10, 3],
+          borderColor: 'rgba(139, 92, 246, 0.8)',
+          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+          pointBackgroundColor: 'rgba(139, 92, 246, 0.8)',
+        },
+        {
+          label: 'OpenAI Agents SDK',
+          data: [10, 0, 0, 0, 0, 7],
+          borderColor: 'rgba(16, 185, 129, 0.8)',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          pointBackgroundColor: 'rgba(16, 185, 129, 0.8)',
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 10,
+          grid: { color: 'rgba(42, 53, 72, 0.5)' },
+          angleLines: { color: 'rgba(42, 53, 72, 0.5)' },
+          pointLabels: { color: '#94a3b8', font: { size: 11 } },
+          ticks: { display: false }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#94a3b8', usePointStyle: true, pointStyle: 'circle', padding: 16, font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  // Protocol heatmap (as grouped bar)
+  const heatCtx = document.getElementById('protocolHeatmap').getContext('2d');
+  const fwNames = ['AutoGen', 'CrewAI', 'LangGraph', 'OpenAI SDK', 'Google ADK', 'Smolagents', 'Open-SWE', 'Claude SDK'];
+  new Chart(heatCtx, {
+    type: 'bar',
+    data: {
+      labels: fwNames,
+      datasets: [
+        {
+          label: 'MCP',
+          data: [5, 10, 10, 10, 10, 5, 0, 10],
+          backgroundColor: 'rgba(16, 185, 129, 0.6)',
+          borderRadius: 4
+        },
+        {
+          label: 'A2A',
+          data: [5, 10, 10, 0, 10, 0, 0, 0],
+          backgroundColor: 'rgba(139, 92, 246, 0.6)',
+          borderRadius: 4
+        },
+        {
+          label: 'AG-UI',
+          data: [0, 0, 10, 0, 10, 0, 0, 0],
+          backgroundColor: 'rgba(6, 182, 212, 0.6)',
+          borderRadius: 4
+        },
+        {
+          label: 'A2UI',
+          data: [0, 0, 0, 0, 10, 0, 0, 0],
+          backgroundColor: 'rgba(236, 72, 153, 0.6)',
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: { color: '#94a3b8', usePointStyle: true, pointStyle: 'rect', padding: 16, font: { size: 11 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const val = ctx.raw;
+              return `${ctx.dataset.label}: ${val === 10 ? 'Native' : val === 5 ? 'Adapter' : 'None'}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#94a3b8', font: { size: 10 } }
+        },
+        y: {
+          display: false,
+          max: 12
+        }
+      }
+    }
+  });
+
+  // Memory capability chart
+  const memCtx = document.getElementById('memoryChart').getContext('2d');
+  new Chart(memCtx, {
+    type: 'radar',
+    data: {
+      labels: ['Long-Term Storage', 'Semantic Search', 'Cross-Session', 'Memory Pruning', 'LLM-Powered', 'Multi-Backend'],
+      datasets: [
+        {
+          label: 'CrewAI',
+          data: [9, 8, 8, 7, 9, 9],
+          borderColor: 'rgba(139, 92, 246, 0.8)',
+          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+        },
+        {
+          label: 'Google ADK',
+          data: [8, 7, 8, 4, 8, 6],
+          borderColor: 'rgba(239, 68, 68, 0.8)',
+          backgroundColor: 'rgba(239, 68, 68, 0.1)',
+        },
+        {
+          label: 'LangGraph',
+          data: [7, 6, 7, 3, 2, 7],
+          borderColor: 'rgba(59, 130, 246, 0.8)',
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        },
+        {
+          label: 'AutoGen',
+          data: [5, 5, 5, 2, 2, 3],
+          borderColor: 'rgba(245, 158, 11, 0.8)',
+          backgroundColor: 'rgba(245, 158, 11, 0.1)',
+        },
+        {
+          label: 'OpenAI SDK',
+          data: [3, 2, 3, 1, 1, 3],
+          borderColor: 'rgba(16, 185, 129, 0.8)',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 10,
+          grid: { color: 'rgba(42, 53, 72, 0.5)' },
+          angleLines: { color: 'rgba(42, 53, 72, 0.5)' },
+          pointLabels: { color: '#94a3b8', font: { size: 11 } },
+          ticks: { display: false }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#94a3b8', usePointStyle: true, pointStyle: 'circle', padding: 16, font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
+
+// ─── Initialize ───
+document.addEventListener('DOMContentLoaded', () => {
+  renderTable(frameworks);
+  renderCards(frameworks);
+  renderMemoryGrid();
+  initCharts();
+
+  // Intersection observer for scroll animations
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('animate-in');
+    }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fw-card, .protocol-card, .insight-card, .method-step, .memory-card').forEach(el => observer.observe(el));
+});
+</script>
+</body>
+</html>

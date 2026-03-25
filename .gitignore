@@ -1,0 +1,8 @@
+.DS_Store
+.agent-memory
+.agent-memory-index.md
+HANDOFF.md
+HANDOFF_TEMPLATE.md
+node_modules/
+.env
+*.log
