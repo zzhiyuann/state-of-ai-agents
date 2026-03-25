@@ -1,13 +1,13 @@
 # State of AI Agents — March 2026
 
-An interactive research report analyzing the AI agent framework ecosystem: 8 major frameworks, 4 interoperability protocols, memory architectures, and market dynamics.
+An interactive research report analyzing the AI agent framework ecosystem: 10 major frameworks, 4 interoperability protocols, memory architectures, and market dynamics.
 
-**[View the live report](https://zzwang-ai.github.io/state-of-ai-agents/)**
+**[View the live report](https://zzhiyuann.github.io/state-of-ai-agents/)**
 
 ## What's Inside
 
-- **8 Framework Deep Dives**: AutoGen/AG2, CrewAI, LangGraph, OpenAI Agents SDK, Google ADK, Smolagents, Open-SWE, Claude Agent SDK
-- **Protocol Maturity Assessment**: MCP (7/10), A2A (5/10), AG-UI (3/10), A2UI (2.5/10)
+- **10 Framework Deep Dives**: AutoGen/AG2, CrewAI, LangGraph, OpenAI Agents SDK, Google ADK, Smolagents, Open-SWE, Claude Agent SDK, Deep Agents, Dapr Agents
+- **Protocol Maturity Assessment**: MCP (8/10), A2A (6/10), AG-UI (4/10), A2UI (3/10)
 - **Memory Architecture Comparison**: From CrewAI's LLM-powered unified memory to basic session stores
 - **Interactive Visualizations**: Sortable comparison tables, radar charts, protocol heatmaps
 - **8 Strategic Insights**: What matters for teams building agent systems today
@@ -43,4 +43,4 @@ MIT License. Data is factual and sourced from public information. Framework desc
 
 ---
 
-Published by [RyanHub Research](https://github.com/zzwang-ai)
+Published by [RyanHub Research](https://github.com/zzhiyuann)
