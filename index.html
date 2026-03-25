@@ -801,6 +801,350 @@
     border: none;
     border-top: 1px solid var(--border);
   }
+
+  /* ─── Framework Finder Quiz ─── */
+  .finder-container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .finder-progress {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    justify-content: center;
+  }
+  .finder-progress .step {
+    width: 48px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+  .finder-progress .step.active {
+    background: var(--accent-blue);
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  }
+  .finder-progress .step.done {
+    background: var(--accent-green);
+  }
+  .finder-question {
+    display: none;
+    animation: fadeSlideUp 0.4s ease-out;
+  }
+  .finder-question.active {
+    display: block;
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .finder-q-text {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+    text-align: center;
+  }
+  .finder-q-sub {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .finder-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .finder-option {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+  }
+  .finder-option:hover {
+    border-color: var(--accent-blue);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+  }
+  .finder-option.selected {
+    border-color: var(--accent-blue);
+    background: rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 1px var(--accent-blue);
+  }
+  .finder-option .opt-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .finder-option .opt-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+  .finder-option .opt-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Results */
+  .finder-results {
+    display: none;
+    animation: fadeSlideUp 0.5s ease-out;
+  }
+  .finder-results.active {
+    display: block;
+  }
+  .finder-results-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+  .finder-results-sub {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .finder-result-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .finder-result-card.top-pick {
+    border-color: var(--accent-blue);
+    background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, var(--bg-card) 60%);
+  }
+  .finder-result-rank {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+  .finder-result-rank.gold { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+  .finder-result-rank.silver { background: rgba(148,163,184,0.15); color: var(--text-secondary); }
+  .finder-result-rank.bronze { background: rgba(168,85,247,0.12); color: var(--accent-purple); }
+  .finder-result-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.15rem;
+  }
+  .finder-result-org {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .finder-match-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+  .finder-match-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s ease-out;
+  }
+  .finder-match-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+  }
+  .finder-match-label strong { color: var(--text-primary); }
+  .finder-reasons {
+    list-style: none;
+    padding: 0;
+  }
+  .finder-reasons li {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    padding: 0.2rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .finder-reasons li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: 600;
+  }
+  .finder-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .finder-btn {
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .finder-btn-primary {
+    background: var(--accent-blue);
+    color: white;
+  }
+  .finder-btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
+  .finder-btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .finder-btn-ghost:hover { border-color: var(--text-muted); color: var(--text-primary); }
+
+  @media (max-width: 600px) {
+    .finder-options { grid-template-columns: 1fr; }
+    .finder-q-text { font-size: 1.15rem; }
+  }
+
+  /* ─── Head-to-Head Comparison Tool ─── */
+  .compare-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .compare-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan), var(--accent-green));
+  }
+  .compare-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  .compare-chip {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+  }
+  .compare-chip:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+  .compare-chip.selected {
+    border-color: var(--accent-blue);
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--accent-blue);
+    font-weight: 600;
+  }
+  .compare-hint {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  .compare-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .compare-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .compare-panel-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .compare-radar-wrap .chart-wrapper { height: 340px; }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .compare-table th {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    cursor: default;
+  }
+  .compare-table td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid rgba(42, 53, 72, 0.3);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  .compare-table td:first-child {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    white-space: nowrap;
+    width: 120px;
+  }
+  .compare-table .cell-highlight {
+    color: var(--accent-green);
+    font-weight: 600;
+  }
+  .compare-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 4rem 1rem;
+    font-size: 0.88rem;
+    grid-column: 1 / -1;
+  }
+  .compare-empty-sub {
+    font-size: 0.78rem;
+    margin-top: 0.3rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+  @media (max-width: 768px) {
+    .compare-body { grid-template-columns: 1fr; }
+    .compare-container { padding: 1.5rem; }
+  }
 </style>
 </head>
 <body>
@@ -814,6 +1158,8 @@
     <li><a href="#protocols">Protocols</a></li>
     <li><a href="#memory">Memory</a></li>
     <li><a href="#insights">Insights</a></li>
+    <li><a href="#finder" style="color: var(--accent-blue);">Finder</a></li>
+    <li><a href="#compare" style="color: var(--accent-purple);">Compare</a></li>
     <li><a href="#methodology">Methodology</a></li>
   </ul>
 </nav>
@@ -1201,6 +1547,52 @@
       <div class="insight-body">
         The Corba vulnerability showed 79-100% of AutoGen agents can be blocked in 1.6-1.9 turns. No framework has built-in
         governance, audit trails, or execution-aware safety. As agents gain more autonomy, this gap becomes critical. Agent security is 2016-era web security.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ FRAMEWORK FINDER ═══════════ -->
+<section id="finder">
+  <div class="section-header">
+    <div class="section-label">Interactive Tool</div>
+    <h2 class="section-title">Which Framework Should You Use?</h2>
+    <p class="section-desc">
+      Answer 5 quick questions and we'll recommend the best frameworks for your specific situation.
+      Based on our deep evaluation of all 10 frameworks above.
+    </p>
+  </div>
+
+  <div class="finder-container">
+    <div class="finder-progress" id="finderProgress"></div>
+    <div id="finderQuestions"></div>
+    <div class="finder-results" id="finderResults"></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ HEAD-TO-HEAD COMPARISON ═══════════ -->
+<section id="compare">
+  <div class="section-header">
+    <div class="section-label">Interactive Comparison</div>
+    <h2 class="section-title">Head-to-Head Framework Comparison</h2>
+    <p class="section-desc">
+      Select 2–4 frameworks to compare them side by side across production readiness, simplicity,
+      protocol support, community, memory, and enterprise capabilities.
+    </p>
+  </div>
+
+  <div class="compare-container">
+    <div class="compare-selector" id="compareSelector"></div>
+    <div class="compare-hint">Select 2–4 frameworks to compare</div>
+    <div class="compare-body" id="compareBody">
+      <div class="compare-empty">
+        <div style="font-size: 2.5rem; opacity: 0.3; margin-bottom: 0.5rem;">&#x2194;</div>
+        Pick frameworks above to see them compared
+        <div class="compare-empty-sub">Radar chart + feature-by-feature breakdown</div>
       </div>
     </div>
   </div>
@@ -1988,12 +2380,185 @@ function initCharts() {
   });
 }
 
+// ─── Framework Finder Quiz ───
+const finderQuestions = [
+  {
+    text: "What's your primary use case?",
+    sub: "What will your agents mainly do?",
+    options: [
+      { icon: '🔧', label: 'General Purpose', desc: 'Versatile agents for varied tasks', scores: {1:2, 2:2, 3:2, 4:2} },
+      { icon: '💻', label: 'Coding & SWE', desc: 'Write code, fix bugs, ship PRs', scores: {6:3, 8:3, 7:2, 5:1} },
+      { icon: '🏢', label: 'Enterprise Automation', desc: 'Business workflows at scale', scores: {2:3, 4:3, 1:2, 9:2} },
+      { icon: '🔬', label: 'Research & Experimentation', desc: 'Explore ideas, run experiments', scores: {5:3, 3:2, 8:2, 7:1} }
+    ]
+  },
+  {
+    text: 'How big is your team?',
+    sub: 'This affects complexity tolerance and support needs',
+    options: [
+      { icon: '🧑', label: 'Solo Developer', desc: 'Just me, move fast', scores: {1:3, 3:3, 5:2, 7:2} },
+      { icon: '👥', label: 'Small Team (2–10)', desc: 'Collaborative, some structure', scores: {2:2, 1:2, 7:2, 8:2} },
+      { icon: '🏗️', label: 'Enterprise (10+)', desc: 'Governance, compliance, scale', scores: {2:3, 4:3, 0:2, 9:3} }
+    ]
+  },
+  {
+    text: 'What language does your team prefer?',
+    sub: 'Framework support varies widely by language',
+    options: [
+      { icon: '🐍', label: 'Python', desc: 'Most framework support', scores: {1:1, 5:2, 7:1} },
+      { icon: '📘', label: 'TypeScript', desc: 'Growing framework support', scores: {2:2, 3:2, 8:2, 6:2} },
+      { icon: '🌐', label: 'Multi-Language', desc: 'Python + TS + Java/Go/.NET', scores: {4:3, 0:2, 2:1} },
+      { icon: '⚙️', label: '.NET / Java / Go', desc: 'Enterprise language stack', scores: {4:3, 0:2, 9:2} }
+    ]
+  },
+  {
+    text: 'How important is protocol support (MCP/A2A)?',
+    sub: 'Interoperability with the emerging agent ecosystem',
+    options: [
+      { icon: '🔗', label: 'Critical', desc: 'Must have native MCP + A2A', scores: {4:3, 1:3, 2:2, 0:1} },
+      { icon: '👍', label: 'Nice to Have', desc: 'Prefer it, not a dealbreaker', scores: {3:2, 7:2, 2:1} },
+      { icon: '🤷', label: 'Not a Priority', desc: 'Features matter more than protocols', scores: {5:2, 6:2, 8:2} }
+    ]
+  },
+  {
+    text: "What's your top priority?",
+    sub: 'If you had to optimize for one thing',
+    options: [
+      { icon: '✨', label: 'Simplicity', desc: 'Get started fast, minimal boilerplate', scores: {3:3, 1:3, 5:2} },
+      { icon: '🎛️', label: 'Flexibility & Control', desc: 'Full power, custom workflows', scores: {2:3, 4:2, 8:2} },
+      { icon: '🚀', label: 'Production Readiness', desc: 'Battle-tested, enterprise-proven', scores: {2:3, 1:2, 4:2, 9:2} },
+      { icon: '⚡', label: 'Cutting Edge', desc: 'Latest innovations, fast iteration', scores: {8:3, 7:3, 4:2} }
+    ]
+  }
+];
+
+// Framework name lookup (index → name)
+const fwLookup = frameworks.map(fw => ({ name: fw.name, org: fw.org }));
+
+let finderStep = 0;
+let finderAnswers = [];
+let finderScores = {};
+
+function initFinder() {
+  // Build progress bar
+  const prog = document.getElementById('finderProgress');
+  prog.innerHTML = finderQuestions.map((_, i) =>
+    `<div class="step" data-step="${i}"></div>`
+  ).join('');
+
+  finderStep = 0;
+  finderAnswers = [];
+  finderScores = {};
+  frameworks.forEach((_, i) => { finderScores[i] = 0; });
+
+  document.getElementById('finderResults').classList.remove('active');
+  renderFinderQuestion();
+}
+
+function renderFinderQuestion() {
+  const q = finderQuestions[finderStep];
+  const container = document.getElementById('finderQuestions');
+  container.innerHTML = `
+    <div class="finder-question active">
+      <div class="finder-q-text">${q.text}</div>
+      <div class="finder-q-sub">${q.sub}</div>
+      <div class="finder-options">
+        ${q.options.map((opt, i) => `
+          <div class="finder-option" onclick="selectFinderOption(${i})">
+            <div class="opt-icon">${opt.icon}</div>
+            <div class="opt-label">${opt.label}</div>
+            <div class="opt-desc">${opt.desc}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  // Update progress
+  document.querySelectorAll('#finderProgress .step').forEach((el, i) => {
+    el.className = 'step' + (i < finderStep ? ' done' : i === finderStep ? ' active' : '');
+  });
+}
+
+function selectFinderOption(optIndex) {
+  const q = finderQuestions[finderStep];
+  const opt = q.options[optIndex];
+
+  // Add scores
+  Object.entries(opt.scores).forEach(([fwIdx, pts]) => {
+    finderScores[parseInt(fwIdx)] = (finderScores[parseInt(fwIdx)] || 0) + pts;
+  });
+
+  finderAnswers.push(optIndex);
+  finderStep++;
+
+  if (finderStep < finderQuestions.length) {
+    renderFinderQuestion();
+  } else {
+    showFinderResults();
+  }
+}
+
+function showFinderResults() {
+  document.getElementById('finderQuestions').innerHTML = '';
+  document.querySelectorAll('#finderProgress .step').forEach(el => el.className = 'step done');
+
+  // Sort frameworks by score
+  const ranked = Object.entries(finderScores)
+    .map(([idx, score]) => ({ idx: parseInt(idx), score, fw: frameworks[parseInt(idx)] }))
+    .filter(r => r.fw)
+    .sort((a, b) => b.score - a.score);
+
+  const maxScore = ranked[0].score;
+  const top3 = ranked.slice(0, 3);
+  const rankLabels = ['gold', 'silver', 'bronze'];
+  const rankNames = ['Best Match', '2nd Pick', '3rd Pick'];
+  const colors = ['var(--accent-amber)', 'var(--text-secondary)', 'var(--accent-purple)'];
+
+  const resultsDiv = document.getElementById('finderResults');
+  resultsDiv.innerHTML = `
+    <div class="finder-results-title">Your Top Frameworks</div>
+    <div class="finder-results-sub">Based on your priorities, here are your best matches</div>
+    ${top3.map((r, i) => {
+      const pct = Math.round((r.score / maxScore) * 100);
+      const reasons = r.fw.strengths.slice(0, 3);
+      return `
+        <div class="finder-result-card ${i === 0 ? 'top-pick' : ''}">
+          <div class="finder-result-rank ${rankLabels[i]}">${rankNames[i]}</div>
+          <div class="finder-result-name">${r.fw.name}</div>
+          <div class="finder-result-org">${r.fw.org}</div>
+          <div class="finder-match-bar">
+            <div class="finder-match-fill" style="width: 0%; background: ${colors[i]};" data-width="${pct}%"></div>
+          </div>
+          <div class="finder-match-label"><strong>${pct}%</strong> match score</div>
+          <ul class="finder-reasons">
+            ${reasons.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }).join('')}
+    <div class="finder-actions">
+      <button class="finder-btn finder-btn-ghost" onclick="initFinder()">Start Over</button>
+      <button class="finder-btn finder-btn-primary" onclick="document.getElementById('frameworks').scrollIntoView({behavior:'smooth'})">See Full Analysis</button>
+    </div>
+  `;
+  resultsDiv.classList.add('active');
+
+  // Animate match bars
+  setTimeout(() => {
+    resultsDiv.querySelectorAll('.finder-match-fill').forEach(bar => {
+      bar.style.width = bar.dataset.width;
+    });
+  }, 100);
+}
+
 // ─── Initialize ───
 document.addEventListener('DOMContentLoaded', () => {
   renderTable(frameworks);
   renderCards(frameworks);
   renderMemoryGrid();
-  initCharts();
+  initFinder();
+  try { initCharts(); } catch(e) { console.warn('Charts failed to load:', e); }
 
   // Intersection observer for scroll animations
   const observer = new IntersectionObserver(
